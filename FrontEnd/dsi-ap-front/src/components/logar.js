@@ -1,11 +1,13 @@
 import logo from '../logo.svg';
+import { Link } from "react-router-dom"
 import '../App.css';
 import { useState } from 'react';
 //POST
 export default function Logar() {
-    const [retorno, setRetorno]=useState([])
+  const [retorno, setRetorno]=useState([])
   const [email, setEmail] = useState('');
   const [telefone, setTelefone] = useState('');
+  
 
   const setEmailChange = (e) => {
     setEmail(e.target.value);
@@ -25,7 +27,7 @@ export default function Logar() {
         setRetorno([])
         return alert('Usuario não encontrado')
     }
-    setRetorno(data)
+    
   }
 
   const logartelefone= async()=>{
@@ -52,6 +54,9 @@ export default function Logar() {
 
         <button onClick={logaremail}>Logar Com Email</button>
         <button onClick={logartelefone}>Logar Com Telefone</button>
+        <Link to="/atualizar" state={retorno}>
+        <button>Atualiar Info</button>
+        </Link>
         <ul>
                 <li>Nome:{retorno.nome}  {retorno.sobrenome}</li>
                 <li>Email:{retorno.email}</li>

@@ -1,9 +1,9 @@
 import Logar from "../components/logar"
 
-export default function Login(){
+export default function Login({user, setUser}){
     return(
         <>
-        <Logar/>
+        <Logar user={user} setUser={setUser}/>
         </>
     )
 }

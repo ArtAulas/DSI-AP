@@ -6,7 +6,10 @@ import Login from './pages/Login';
 import Usuario from './pages/Usuario';
 import CadastroPage from './pages/Cadastro';
 import AtualizaPage from './pages/Atualizar';
+import Atualiza from './components/atualiza';
+import Logar from './components/logar';
 import { Layout } from './layout';
+import { useState } from 'react';
 
 function App() {
   return (
@@ -14,7 +17,7 @@ function App() {
       <Routes>
         <Route element={<Layout/>}>
         <Route path='/' element={<HomePage/>}/>
-        <Route path='/login' element={<Login/>}/>
+        <Route path='/login' element={<Logar/>}/>
         <Route path='/cadastro' element={<CadastroPage/>}/>
         <Route path='/usuario' element={<Usuario/>}/>
         <Route path='/atualizar' element={<AtualizaPage/>}/>

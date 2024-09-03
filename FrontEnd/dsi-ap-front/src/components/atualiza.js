@@ -2,12 +2,13 @@ import logo from '../logo.svg';
 import '../App.css';
 import { useState } from 'react';
 //POST
-export default function Atualiza(id) {
-  const [nome, setNome] = useState('');
-  const [sobrenome, setSobrenome] = useState('');
-  const [email, setEmail] = useState('');
-  const [telefone, setTelefone] = useState('');
-  const [cpf,setCPF]=useState('')
+export default async function Atualiza() {
+
+  const [nome, setNome] = useState(user.nome);
+  const [sobrenome, setSobrenome] = useState(user.sobrenome);
+  const [email, setEmail] = useState(user.email);
+  const [telefone, setTelefone] = useState(user.telefone);
+  const [cpf,setCPF]=useState(user.cpf)
 
   const setNomeChange = (e) => {
     setNome(e.target.value);
@@ -30,7 +31,7 @@ export default function Atualiza(id) {
   }
 
   const salvar= async()=>{
-    let api = await fetch('http://127.0.0.1:8003/usuarios/atualizar' + id,{
+    let api = await fetch('http://127.0.0.1:8003/usuarios/atualizar',{
       method:"PUT",
       headers:{
         "Content-Type": "application/json"
