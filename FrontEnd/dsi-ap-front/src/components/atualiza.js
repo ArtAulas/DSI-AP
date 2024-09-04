@@ -4,11 +4,11 @@ import { useState } from 'react';
 //POST
 export default async function Atualiza() {
 
-  const [nome, setNome] = useState(user.nome);
-  const [sobrenome, setSobrenome] = useState(user.sobrenome);
-  const [email, setEmail] = useState(user.email);
-  const [telefone, setTelefone] = useState(user.telefone);
-  const [cpf,setCPF]=useState(user.cpf)
+  const [nome, setNome] = useState('');
+  const [sobrenome, setSobrenome] = useState('');
+  const [email, setEmail] = useState('');
+  const [telefone, setTelefone] = useState('');
+  const [cpf,setCPF]=useState('')
 
   const setNomeChange = (e) => {
     setNome(e.target.value);

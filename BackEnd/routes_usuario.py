@@ -23,7 +23,6 @@ def buscar(db:Session=Depends(get_db)):
 
 @router.get("/buscar/email/{email}")#Read
 def buscarEmail(email:str, db:Session=Depends(get_db)):
-    print(email)
     usuario_on_db=db.query(Usuario).filter(Usuario.email==email).first()
     if usuario_on_db is None:
         return Response(content='Usuário não encontrado',status_code=404)
@@ -32,9 +31,15 @@ def buscarEmail(email:str, db:Session=Depends(get_db)):
     db.commit()
     return UsuarioResponse.model_validate(usuario_on_db)
 
+@router.get("/buscar/id/{id}")#Read
+def buscarId(id:int, db:Session=Depends(get_db)):
+    usuario_on_db=db.query(Usuario).filter(Usuario.id==id).first()
+    if usuario_on_db is None:
+        return Response(content='Usuário não encontrado',status_code=404)
+    return UsuarioResponse.model_validate(usuario_on_db)
+
 @router.get("/buscar/telefone/{telefone}")#Read
 def buscarTelefone(telefone:int, db:Session=Depends(get_db)):
-    print(telefone)
     usuario_on_db=db.query(Usuario).filter(Usuario.telefone==telefone).first()
     if usuario_on_db is None:
         return Response(content='Usuário não encontrado',status_code=404)

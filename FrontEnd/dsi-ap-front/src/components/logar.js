@@ -2,8 +2,12 @@ import logo from '../logo.svg';
 import { Link } from "react-router-dom"
 import '../App.css';
 import { useState } from 'react';
+import { useContext } from 'react';
+import { UserContext } from '../context/UserContext';
 //POST
 export default function Logar() {
+  const{userId,ChangeUser}=useContext(UserContext)
+
   const [retorno, setRetorno]=useState([])
   const [email, setEmail] = useState('');
   const [telefone, setTelefone] = useState('');
@@ -27,7 +31,8 @@ export default function Logar() {
         setRetorno([])
         return alert('Usuario não encontrado')
     }
-    
+    setRetorno(data);
+    ChangeUser(data.id)
   }
 
   const logartelefone= async()=>{
@@ -40,10 +45,12 @@ export default function Logar() {
         return alert('ID não encontrado')
     }
     setRetorno(data)
+    ChangeUser(data.id)
   }
   
   return (
     <div className="App">
+      <p>o Usuário atual é {userId}</p>
       <div>
 
         Email: <input type='text' name='email' 
@@ -54,8 +61,8 @@ export default function Logar() {
 
         <button onClick={logaremail}>Logar Com Email</button>
         <button onClick={logartelefone}>Logar Com Telefone</button>
-        <Link to="/atualizar" state={retorno}>
-        <button>Atualiar Info</button>
+        <Link to="/usuario">
+        <button>Exibir Info</button>
         </Link>
         <ul>
                 <li>Nome:{retorno.nome}  {retorno.sobrenome}</li>
