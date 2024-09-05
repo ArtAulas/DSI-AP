@@ -2,11 +2,13 @@ import { UserContext } from "../context/UserContext"
 import { useContext, useState } from "react"
 import { Link } from "react-router-dom"
 import { useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 export default function Usuario(){
     const {userId, ChangeUser}=useContext(UserContext)
     const [retorno, setRetorno]=useState([])
+    let navigate=useNavigate()
 
-    const Deslogar=()=>(
+    const ResetarId=()=>(
         ChangeUser(0)
     )
 
@@ -15,6 +17,27 @@ export default function Usuario(){
         let data=await api.json()
         setRetorno(data)
         console.log(data)
+    }
+
+    const ConfirmDeletar=()=>{
+        let text = "Confirma a Deleção?";
+        if(window.confirm(text)===true){
+            Deletar()
+        }else{
+            alert('Você Cancelou a Deleção')
+        }
+    }
+
+    const Deletar=async()=>{
+        let api = await fetch('http://127.0.0.1:8003/usuarios/apagar/'+userId,{
+            method:"DELETE",
+            headers:{
+              "Content-Type": "application/json"
+            },
+          })
+        alert('Usuário Deletado')
+        ResetarId()
+        navigate('/login')
     }
 
     useEffect(() => {
@@ -27,13 +50,20 @@ export default function Usuario(){
         <>
         <ul>
                 <li>Nome:{retorno.nome}  {retorno.sobrenome}</li>
-                <li>Email:{retorno.email}</li>
-                <li>Telefone:{retorno.telefone}</li>
+                <li>Email:{retorno.email} Data de Confirmação:{retorno.dt_confirm_email}</li>
+                
+                <li>Telefone:{retorno.telefone} Data de Confirmação:{retorno.dt_confirm_telefone}</li>
                 <li>CPF:{retorno.cpf}</li>
+                <li>Permitir anúncios de terceiros:{retorno.anuncios}</li>
         </ul>
             <Link to='/login'>
-            <button onClick={Deslogar}>Deslogar</button>
+            <button onClick={ResetarId}>Deslogar</button>
             </Link>
+            <Link to="/atualizar">
+            <button>Atualizar Info</button>
+            </Link>
+
+            <button onClick={ConfirmDeletar}>Remover Cadastro</button>
         
         </>
     )

@@ -1,9 +1,12 @@
 import Logar from "../components/logar"
-
-export default function Login({user, setUser}){
+import { Link } from "react-router-dom"
+export default function Login(){
     return(
         <>
-        <Logar user={user} setUser={setUser}/>
+        <Link to="/">
+            <button>Home</button>
+        </Link>
+        <Logar/>
         </>
     )
 }

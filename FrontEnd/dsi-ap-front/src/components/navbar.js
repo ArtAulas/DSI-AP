@@ -6,9 +6,7 @@ export default function NavBar(){
         <Link to="Login">
             <button>Login</button>
         </Link>
-        <Link to="/">
-            <button>Home</button>
-        </Link>
+        
         <Link to="/cadastro">
             <button>Cadastro</button>
         </Link>

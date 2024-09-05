@@ -4,9 +4,11 @@ import '../App.css';
 import { useState } from 'react';
 import { useContext } from 'react';
 import { UserContext } from '../context/UserContext';
+import { useNavigate } from 'react-router-dom';
 //POST
 export default function Logar() {
   const{userId,ChangeUser}=useContext(UserContext)
+  let navigate = useNavigate();
 
   const [retorno, setRetorno]=useState([])
   const [email, setEmail] = useState('');
@@ -33,6 +35,7 @@ export default function Logar() {
     }
     setRetorno(data);
     ChangeUser(data.id)
+    return navigate("/usuario")
   }
 
   const logartelefone= async()=>{
@@ -46,6 +49,7 @@ export default function Logar() {
     }
     setRetorno(data)
     ChangeUser(data.id)
+    return navigate("/usuario")
   }
   
   return (
@@ -61,9 +65,9 @@ export default function Logar() {
 
         <button onClick={logaremail}>Logar Com Email</button>
         <button onClick={logartelefone}>Logar Com Telefone</button>
-        <Link to="/usuario">
+        {/* <Link to="/usuario">
         <button>Exibir Info</button>
-        </Link>
+        </Link> */}
         <ul>
                 <li>Nome:{retorno.nome}  {retorno.sobrenome}</li>
                 <li>Email:{retorno.email}</li>

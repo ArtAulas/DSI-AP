@@ -1,14 +1,38 @@
-import logo from '../logo.svg';
-import '../App.css';
-import { useState } from 'react';
+import { UserContext } from "../context/UserContext";
+import { useState } from "react"
+import { useContext } from "react"
+import { redirect } from "react-router-dom";
+import { useEffect } from "react"
+import { useNavigate } from "react-router-dom";
 //POST
-export default async function Atualiza() {
+export default function Atualiza() {
+  const {userId}=useContext(UserContext)
+  let navigate = useNavigate();
 
   const [nome, setNome] = useState('');
   const [sobrenome, setSobrenome] = useState('');
   const [email, setEmail] = useState('');
   const [telefone, setTelefone] = useState('');
   const [cpf,setCPF]=useState('')
+  const [anuncios,setAnuncios]=useState('')
+
+  const GetUserInfo=async()=>{
+    let api = await fetch('http://127.0.0.1:8003/usuarios/buscar/id/'+userId)
+    let data=await api.json()
+    console.log('data', data)
+    setNome(data.nome)
+    setSobrenome(data.sobrenome)
+    setEmail(data.email)
+    setTelefone(data.telefone)
+    setCPF(data.cpf)
+    setAnuncios(String(data.anuncios))
+  }
+
+  useEffect(() => {
+
+    GetUserInfo();
+    
+    },[]);
 
   const setNomeChange = (e) => {
     setNome(e.target.value);
@@ -30,8 +54,12 @@ export default async function Atualiza() {
     setCPF(e.target.value)
   }
 
+  const setAnunciosChange=(e)=>{
+    setAnuncios(e.target.value)
+  }
+
   const salvar= async()=>{
-    let api = await fetch('http://127.0.0.1:8003/usuarios/atualizar',{
+    let api = await fetch('http://127.0.0.1:8003/usuarios/atualizar/'+userId,{
       method:"PUT",
       headers:{
         "Content-Type": "application/json"
@@ -42,16 +70,18 @@ export default async function Atualiza() {
         "email": email,
         "telefone": telefone,
         "cpf":cpf,
-        "anuncios":false
+        "anuncios":anuncios
       })
     })
     
     let data = await api.json();
     console.log(data)
     if(api.ok){
-      return alert("Cadastro ok")
+      alert("Atualização ok")
+      navigate('/usuario')
+      return
     }else{
-      return alert("Erro ao cadastrar")
+      return alert("Erro ao atualizar")
     }
   }
   
@@ -64,7 +94,7 @@ export default async function Atualiza() {
         Sobrenome: <input type='text' name='sobrenome' 
         value={sobrenome} onChange={setSobrenomeChange} /><br/>
 
-        Email: <input type='text' name='email' 
+        Email: <input type='email' name='email' 
         value={email} onChange={setEmailChange} /><br/>
 
         Telefone: <input type='text' name='telefone' 
@@ -73,7 +103,13 @@ export default async function Atualiza() {
         CPF: <input type='text' name='cpf' 
         value={cpf} onChange={setCPFChange} placeholder='XXX.XXX.XXX-XX'/><br/>
 
-        <button onClick={salvar}>Cadastrar</button>
+        Permitir anuncios de terceiros: 
+        <input type="radio" name="anuncios" value='true' checked={anuncios ==='true'} onChange={setAnunciosChange}/>
+        <label>Permitir</label>
+        <input type="radio" name="anuncios" value="false" checked={anuncios ==='false'} onChange={setAnunciosChange}/>
+        <label>Não Permitir</label>
+        <br/>
+        <button onClick={salvar}>Atualizar</button>
       </div>
     </div>
   );
