@@ -1,7 +1,6 @@
 import { UserContext } from "../context/UserContext";
 import { useState } from "react"
 import { useContext } from "react"
-import { redirect } from "react-router-dom";
 import { useEffect } from "react"
 import { useNavigate } from "react-router-dom";
 //POST

@@ -1,6 +1,6 @@
 #CRUD- CREATE READ UPDATE DELETE
 from fastapi import APIRouter, Depends, Response
-from db_user import UsuarioRequest, UsuarioResponse, Usuario
+from db.db_user import UsuarioRequest, UsuarioResponse, Usuario
 from sqlalchemy.orm import Session
 from datetime import datetime
 

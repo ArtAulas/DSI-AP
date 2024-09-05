@@ -1,8 +1,11 @@
 import logo from '../logo.svg';
 import '../App.css';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 //POST
 export default function Cadastro() {
+  let navigate = useNavigate();
+
   const [nome, setNome] = useState('');
   const [sobrenome, setSobrenome] = useState('');
   const [email, setEmail] = useState('');
@@ -48,7 +51,8 @@ export default function Cadastro() {
     let data = await api.json();
     console.log(data)
     if(api.ok){
-      return alert("Cadastro ok")
+      alert("Cadastro ok")
+      return navigate('/login')
     }else{
       return alert("Erro ao cadastrar")
     }

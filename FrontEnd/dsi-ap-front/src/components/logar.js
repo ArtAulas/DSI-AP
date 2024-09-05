@@ -54,7 +54,6 @@ export default function Logar() {
   
   return (
     <div className="App">
-      <p>o Usuário atual é {userId}</p>
       <div>
 
         Email: <input type='text' name='email' 
@@ -65,15 +64,6 @@ export default function Logar() {
 
         <button onClick={logaremail}>Logar Com Email</button>
         <button onClick={logartelefone}>Logar Com Telefone</button>
-        {/* <Link to="/usuario">
-        <button>Exibir Info</button>
-        </Link> */}
-        <ul>
-                <li>Nome:{retorno.nome}  {retorno.sobrenome}</li>
-                <li>Email:{retorno.email}</li>
-                <li>Telefone:{retorno.telefone}</li>
-                <li>CPF:{retorno.cpf}</li>
-        </ul>
       </div>
     </div>
   );

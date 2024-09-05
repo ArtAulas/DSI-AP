@@ -39,6 +39,7 @@ export default function Usuario(){
         ResetarId()
         navigate('/login')
     }
+    
 
     useEffect(() => {
 
@@ -54,7 +55,6 @@ export default function Usuario(){
                 
                 <li>Telefone:{retorno.telefone} Data de Confirmação:{retorno.dt_confirm_telefone}</li>
                 <li>CPF:{retorno.cpf}</li>
-                <li>Permitir anúncios de terceiros:{retorno.anuncios}</li>
         </ul>
             <Link to='/login'>
             <button onClick={ResetarId}>Deslogar</button>
