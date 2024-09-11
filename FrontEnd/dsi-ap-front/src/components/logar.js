@@ -4,10 +4,12 @@ import '../App.css';
 import { useState } from 'react';
 import { useContext } from 'react';
 import { UserContext } from '../context/UserContext';
+import { CodigoContext } from '../context/CodigoContext';
 import { useNavigate } from 'react-router-dom';
 //POST
 export default function Logar() {
   const{userId,ChangeUser}=useContext(UserContext)
+  const{codigo,ChangeCodigo}=useContext(CodigoContext)
   let navigate = useNavigate();
 
   const [retorno, setRetorno]=useState([])
@@ -35,7 +37,10 @@ export default function Logar() {
     }
     setRetorno(data);
     ChangeUser(data.id)
-    return navigate("/usuario")
+    let num=Math.floor(Math.random()*1000000)
+	  console.log(num)
+    ChangeCodigo(num)
+    return navigate("/loginemail")
   }
 
   const logartelefone= async()=>{
