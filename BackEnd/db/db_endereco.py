@@ -33,3 +33,6 @@ class EnderecoResponse(BaseModel):
     endereco_casa:bool
     endereco_trabalho:bool
     id_usuario:int
+
+    class Config:
+        from_attributes=True

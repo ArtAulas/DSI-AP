@@ -64,7 +64,12 @@ export default function Usuario(){
             </Link>
 
             <button onClick={ConfirmDeletar}>Remover Cadastro</button>
+
+            <Link to='/cadastroendereco'>
+            <button>Cadastrar Endereco</button>
+            </Link>
         
         </>
+        // Adicionar Listagem de todos os Endereços
     )
 }

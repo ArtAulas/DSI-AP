@@ -7,16 +7,20 @@ import CadastroPage from './pages/Cadastro';
 import AtualizaPage from './pages/Atualizar';
 import Login from './pages/Login';
 import { UserProvider } from './context/UserContext';
-import Contact from './components/loginEmail';
+import ValidarCodigo from './components/loginEmail';
 import { CodigoProvider } from './context/CodigoContext';
+import { EnderecoProvider } from './context/EnderecoContext';
+import CadastroEndereco from './components/cadastrarendereco';
 
 function App() {
   return (
     <UserProvider>
+      <EnderecoProvider>
       <CodigoProvider>
       <Router>
       <Routes>
-        <Route path='/loginemail' element={<Contact/>}/>
+        <Route path='/cadastroendereco' element={<CadastroEndereco/>}/>
+        <Route path='/loginemail' element={<ValidarCodigo/>}/>
         <Route path='/' element={<HomePage/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/cadastro' element={<CadastroPage/>}/>
@@ -25,6 +29,7 @@ function App() {
       </Routes>
       </Router>
       </CodigoProvider>
+      </EnderecoProvider>
     </UserProvider>
   );
 }

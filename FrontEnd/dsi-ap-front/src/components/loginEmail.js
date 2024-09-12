@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 
-export default function Contact() {
+export default function ValidarCodigo() {
 	const{userId,ChangeUser}=useContext(UserContext)
 	const{codigo,ChangeCodigo}=useContext(CodigoContext)
 	const[codigoTeste,setCodigo]=useState(0)
@@ -34,20 +34,20 @@ export default function Contact() {
 
 	let num=codigo
 
-	var templateParams = {
-		user_name:nome,
-		user_email:email,
-		message:num
-	  };
+	// var templateParams = {
+	// 	user_name:nome,
+	// 	user_email:email,
+	// 	message:num
+	//   };
 	  
-	emailjs.send('service_kgrhjxr', 'template_48e1k3a', templateParams,'JJm5KOCL3j8ImEgu5').then(
-		(response) => {
-			console.log('SUCCESS!', response.status, response.text);
-		},
-		(error) => {
-			console.log('FAILED...', error);
-		},
-	);
+	// emailjs.send('service_kgrhjxr', 'template_48e1k3a', templateParams,'JJm5KOCL3j8ImEgu5').then(
+	// 	(response) => {
+	// 		console.log('SUCCESS!', response.status, response.text);
+	// 	},
+	// 	(error) => {
+	// 		console.log('FAILED...', error);
+	// 	},
+	// );
 
 	const confirmarCodigo=()=>{
 		if (codigo==codigoTeste){
