@@ -37,12 +37,11 @@ export default function CadastroEndereco(){
         
         let casa=false
         let trabalho=false
-        tipo_res=tipo_res.toLowerCase
 
-        if (tipo_res=='casa'){
+        if (tipo_res=='Casa'){
             casa=true
             console.log(casa,trabalho)
-        }else if(tipo_res=='trabalho'){
+        }else if(tipo_res=='Trabalho'){
             trabalho=true
             console.log(casa,trabalho)
         }else if(tipo_res==''){
@@ -72,7 +71,7 @@ export default function CadastroEndereco(){
         let data=await api.json()
         console.log(data)
         if(api.ok){
-            alert("Cadastro ok")
+            alert("Cadastro Realizado Com Sucesso")
             navigate('/usuario')
           }else{
             return alert("Erro ao cadastrar")
@@ -83,16 +82,19 @@ export default function CadastroEndereco(){
         <form onSubmit={salvar}>
             <label>Logradouro</label>
             <input type="text" name='logradouro' value={logradouro} onChange={changeLogradouro}></input>
-            <label>Número</label>
+            <br/><label>Número</label>
             <input type="number" name="numero" value={numero} onChange={changeNumero}></input>
-            <label>Complemento</label>
+            <br/><label>Complemento</label>
             <input type="text" name='complemento' value={complemento} onChange={changeComplemento}></input>
-            <label>Ponto de Referência</label>
+            <br/><label>Ponto de Referência</label>
             <input type="text" name='referencia' value={referencia} onChange={changeReferencia}></input>
-            <label>Tipo de Residência</label>
-            <input type="text" name='tipo_res' value={tipo_res} onChange={changeTipo} placeholder="Casa ou Trabalho"></input>
+            <br/><label>Tipo de Residência</label>
+            <br/><input type="radio" name="tipo" value="Casa" onChange={changeTipo}/>
+            <label>Casa</label>
+            <input type="radio" name="tipo" value="Trabalho" onChange={changeTipo}/>
+            <label>Trabalho</label>
             {/* ^ Mudar tipo_res para radio ou alguma coisa assim */}
-			<input type="submit" value="Cadastrar"/>
+			<br/><input type="submit" value="Cadastrar"/>
         </form>
     )
 }
