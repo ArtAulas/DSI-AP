@@ -3,6 +3,8 @@ import { useContext, useState } from "react"
 import { Link } from "react-router-dom"
 import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
+import ListaEndereco from "../components/listaendereco"
+
 export default function Usuario(){
     const {userId, ChangeUser}=useContext(UserContext)
     const [retorno, setRetorno]=useState([])
@@ -49,6 +51,7 @@ export default function Usuario(){
     
     return(
         <>
+        <h1>Dados do Usuário</h1>
         <ul>
                 <li>Nome:{retorno.nome}  {retorno.sobrenome}</li>
                 <li>Email:{retorno.email} Data de Confirmação:{retorno.dt_confirm_email}</li>
@@ -68,6 +71,8 @@ export default function Usuario(){
             <Link to='/cadastroendereco'>
             <button>Cadastrar Endereco</button>
             </Link>
+
+            <ListaEndereco/>
         
         </>
         // Adicionar Listagem de todos os Endereços

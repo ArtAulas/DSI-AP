@@ -37,15 +37,15 @@ export default function CadastroEndereco(){
         
         let casa=false
         let trabalho=false
-        tipo_res=tipo_res.toLowerCase
+        let tipo_res_temp=tipo_res.toLowerCase()
 
-        if (tipo_res=='casa'){
+        if (tipo_res_temp=='casa'){
             casa=true
             console.log(casa,trabalho)
-        }else if(tipo_res=='trabalho'){
+        }else if(tipo_res_temp=='trabalho'){
             trabalho=true
             console.log(casa,trabalho)
-        }else if(tipo_res==''){
+        }else if(tipo_res_temp==''){
             console.log(casa,trabalho)
         }else{
             alert('Tipo de Residência incompatível')
@@ -82,15 +82,15 @@ export default function CadastroEndereco(){
     return(
         <form onSubmit={salvar}>
             <label>Logradouro</label>
-            <input type="text" name='logradouro' value={logradouro} onChange={changeLogradouro}></input>
+            <input type="text" name='logradouro' value={logradouro} onChange={changeLogradouro}/><br/>
             <label>Número</label>
-            <input type="number" name="numero" value={numero} onChange={changeNumero}></input>
+            <input type="number" name="numero" value={numero} onChange={changeNumero}/><br/>
             <label>Complemento</label>
-            <input type="text" name='complemento' value={complemento} onChange={changeComplemento}></input>
+            <input type="text" name='complemento' value={complemento} onChange={changeComplemento}/><br/>
             <label>Ponto de Referência</label>
-            <input type="text" name='referencia' value={referencia} onChange={changeReferencia}></input>
+            <input type="text" name='referencia' value={referencia} onChange={changeReferencia}/><br/>
             <label>Tipo de Residência</label>
-            <input type="text" name='tipo_res' value={tipo_res} onChange={changeTipo} placeholder="Casa ou Trabalho"></input>
+            <input type="text" name='tipo_res' value={tipo_res} onChange={changeTipo} placeholder="Casa ou Trabalho"/><br/>
             {/* ^ Mudar tipo_res para radio ou alguma coisa assim */}
 			<input type="submit" value="Cadastrar"/>
         </form>

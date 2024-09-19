@@ -10,6 +10,9 @@ export default function HomePage(){
         <Link to="/cadastro">
             <button>Cadastro</button>
         </Link>
+        <Link to="/restaurante">
+            <button>Gerenciamento Restaurante</button>
+        </Link>
         </div>
     )
 }

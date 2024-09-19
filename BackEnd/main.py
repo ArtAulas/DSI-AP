@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routes.routes_usuario import router as router1
 from routes.routes_endereco import router as router2
+from routes.routes_restaurante import router as router3
 app=FastAPI()
 
 origins = ["*"]
@@ -20,6 +21,7 @@ def helloworld():
 
 app.include_router(router1)
 app.include_router(router2)
+app.include_router(router3)
 
 if __name__=='__main__':
     import uvicorn

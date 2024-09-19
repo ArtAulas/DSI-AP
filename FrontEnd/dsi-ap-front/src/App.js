@@ -11,6 +11,12 @@ import ValidarCodigo from './components/loginEmail';
 import { CodigoProvider } from './context/CodigoContext';
 import { EnderecoProvider } from './context/EnderecoContext';
 import CadastroEndereco from './components/cadastrarendereco';
+import CadastroRestaurante from './components/cadastrorestaurante';
+import RestaurantePage from './pages/PaginaRestaurante';
+import LoginGoogle from './components/logingoogle';
+import ListaRestaurante from './components/listagemrestaurante';
+import AtualizaRestaurante from './components/atualizarestaurante';
+import DeletaRestaurante from './components/deletarestaurante';
 
 function App() {
   return (
@@ -19,6 +25,12 @@ function App() {
       <CodigoProvider>
       <Router>
       <Routes>
+        <Route path='/logingoogle' element={<LoginGoogle/>}/>
+        <Route path='/deletarestaurante' element={<DeletaRestaurante/>}/>
+        <Route path='/atualizarestaurante' element={<AtualizaRestaurante/>}/>
+        <Route path='/listarestaurante' element={<ListaRestaurante/>}/>
+        <Route path='/restaurante' element={<RestaurantePage/>}/>
+        <Route path='/cadastrorestaurante' element={<CadastroRestaurante/>}/>
         <Route path='/cadastroendereco' element={<CadastroEndereco/>}/>
         <Route path='/loginemail' element={<ValidarCodigo/>}/>
         <Route path='/' element={<HomePage/>}/>
