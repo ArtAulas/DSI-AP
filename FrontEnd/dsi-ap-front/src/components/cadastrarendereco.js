@@ -72,7 +72,7 @@ export default function CadastroEndereco(){
         let data=await api.json()
         console.log(data)
         if(api.ok){
-            alert("Cadastro ok")
+            alert("Cadastro Realizado Com Sucesso")
             navigate('/usuario')
           }else{
             return alert("Erro ao cadastrar")
@@ -92,7 +92,7 @@ export default function CadastroEndereco(){
             <label>Tipo de Residência</label>
             <input type="text" name='tipo_res' value={tipo_res} onChange={changeTipo} placeholder="Casa ou Trabalho"/><br/>
             {/* ^ Mudar tipo_res para radio ou alguma coisa assim */}
-			<input type="submit" value="Cadastrar"/>
+			<br/><input type="submit" value="Cadastrar"/>
         </form>
     )
 }
