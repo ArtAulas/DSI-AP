@@ -1,10 +1,12 @@
-import { useState, useContext } from "react"
+import { useState, useContext, useEffect } from "react"
 import { UserContext } from "../context/UserContext"
 import { useNavigate,Link } from "react-router-dom"
+import { EnderecoContext } from "../context/EnderecoContext"
 
-export default function CadastroEndereco(){
+export default function AtualizaEndereco(){
     let navigate=useNavigate()
 	const{userId,ChangeUser}=useContext(UserContext)
+    const {enderecoId, ChangeEndereco}=useContext(EnderecoContext)
 
     const[logradouro,setLogradouro]=useState('')
     const changeLogradouro=(e)=>{
@@ -70,12 +72,32 @@ export default function CadastroEndereco(){
         let data=await api.json()
         console.log(data)
         if(api.ok){
-            alert("Cadastro Realizado Com Sucesso")
+            alert("Atualização Realizada Com Sucesso")
             navigate('/usuario')
           }else{
-            return alert("Erro ao cadastrar")
+            return alert("Erro ao atualizar")
           }
     }
+
+    const busca=async()=>{
+        let url='http://127.0.0.1:8003/endereco/buscar/id/'+enderecoId
+        let response=await fetch(url)
+        let api=await response.json()
+        console.log(api)
+        setLogradouro(api.logradouro)
+        setNumero(api.numero)
+        setComplemento(api.complemento)
+        setReferencia(api.ponto_de_referencia)
+        if (api.endereco_casa==true){
+            setTipo('Casa')
+        }else if(api.endereco_trabalho==true){
+            setTipo('Trabalho')
+        }
+    }
+
+    useEffect(() => {
+        busca();
+        },[]);
 
     return(
         <>
@@ -94,7 +116,7 @@ export default function CadastroEndereco(){
             <label>Tipo de Residência</label>
             <input type="text" name='tipo_res' value={tipo_res} onChange={changeTipo} placeholder="Casa ou Trabalho"/><br/>
             {/* ^ Mudar tipo_res para radio ou alguma coisa assim */}
-			<br/><input type="submit" value="Cadastrar"/>
+			<br/><input type="submit" value="Atualizar"/>
         </form>
         </>
     )

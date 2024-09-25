@@ -17,6 +17,8 @@ import LoginGoogle from './components/logingoogle';
 import ListaRestaurante from './components/listagemrestaurante';
 import AtualizaRestaurante from './components/atualizarestaurante';
 import DeletaRestaurante from './components/deletarestaurante';
+import AtualizaEndereco from './components/atualizaendereco';
+import PaginaInicial from './pages/PaginaInicial';
 
 function App() {
   return (
@@ -25,7 +27,8 @@ function App() {
       <CodigoProvider>
       <Router>
       <Routes>
-        <Route path='/logingoogle' element={<LoginGoogle/>}/>
+        <Route path='/paginainicial' element={<PaginaInicial/>}/>
+        <Route path='/atualizaendereco' element={<AtualizaEndereco/>}/>
         <Route path='/deletarestaurante' element={<DeletaRestaurante/>}/>
         <Route path='/atualizarestaurante' element={<AtualizaRestaurante/>}/>
         <Route path='/listarestaurante' element={<ListaRestaurante/>}/>
@@ -38,6 +41,7 @@ function App() {
         <Route path='/cadastro' element={<CadastroPage/>}/>
         <Route path='/atualizar' element={<AtualizaPage/>}/>
         <Route path='/usuario' element={<Usuario/>}/>
+        <Route path='/logingoogle' element={<LoginGoogle/>}/>
       </Routes>
       </Router>
       </CodigoProvider>

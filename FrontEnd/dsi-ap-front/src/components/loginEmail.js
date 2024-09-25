@@ -52,7 +52,7 @@ export default function ValidarCodigo() {
 	const confirmarCodigo=()=>{
 		if (codigo==codigoTeste){
 			alert('Código Válido')
-			navigate('/usuario')
+			navigate('/paginainicial')
 		}
 		else{
 			return alert('Codigo Incorreto')

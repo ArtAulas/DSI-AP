@@ -51,12 +51,17 @@ export default function Usuario(){
     
     return(
         <>
+        <Link to='/paginainicial'>
+        <button>Voltar</button>
+        </Link>
         <h1>Dados do Usuário</h1>
         <ul>
                 <li>Nome:{retorno.nome}  {retorno.sobrenome}</li>
-                <li>Email:{retorno.email} Data de Confirmação:{retorno.dt_confirm_email}</li>
+                <li>Email:{retorno.email} </li>
+                <li className="dt_confirm">Data de Confirmação:{retorno.dt_confirm_email}</li>
                 
-                <li>Telefone:{retorno.telefone} Data de Confirmação:{retorno.dt_confirm_telefone}</li>
+                <li>Telefone:{retorno.telefone} </li>
+                <li  className="dt_confirm">Data de Confirmação:{retorno.dt_confirm_telefone}</li>
                 <li>CPF:{retorno.cpf}</li>
         </ul>
             <Link to='/login'>
@@ -75,6 +80,6 @@ export default function Usuario(){
             <ListaEndereco/>
         
         </>
-        // Adicionar Listagem de todos os Endereços
+        
     )
 }

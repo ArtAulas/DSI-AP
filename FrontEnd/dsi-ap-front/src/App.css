@@ -51,3 +51,7 @@ body{
   justify-content: center;
   display:flex
 }
+
+.dt_confirm{
+  font-size: 0.75em;
+}

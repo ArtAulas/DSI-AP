@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate,Link } from "react-router-dom"
 
 export default function AtualizaRestaurante(){
     let navigate=useNavigate()
@@ -103,6 +103,9 @@ export default function AtualizaRestaurante(){
 
     return(
         <>
+        <Link to='/restaurante'>
+        <button>Voltar</button>
+        </Link>
         <h1>Atualização de Restaurante</h1>
         <form onSubmit={salvar}>
         <label>ID</label>

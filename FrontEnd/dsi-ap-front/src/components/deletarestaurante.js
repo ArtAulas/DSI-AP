@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate,Link } from "react-router-dom"
 
 export default function DeletaRestaurante(){
     let navigate=useNavigate()
@@ -18,6 +18,7 @@ export default function DeletaRestaurante(){
             alert('Você Cancelou a Deleção')
         }
     }
+    
     const Deletar=async()=>{
         let api = await fetch('http://127.0.0.1:8003/restaurantes/apagar/'+id,{
             method:"DELETE",
@@ -31,6 +32,9 @@ export default function DeletaRestaurante(){
 
     return(
         <>
+        <Link to='/restaurante'>
+        <button>Voltar</button>
+        </Link>
         <h1>Remoção de Restaurante</h1>
         <form onSubmit={ConfirmDeletar}>
         <label>Insira o ID do restaurante</label>

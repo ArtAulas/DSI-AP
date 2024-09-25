@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { googleLogout, useGoogleLogin } from '@react-oauth/google';
+import { googleLogout, useGoogleLogin,GoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
 
 export default function LoginGoogle(){
     const [ user, setUser ] = useState([]);
-    const [ profile, setProfile ] = useState([]);
+
+    const [nome, setNome] = useState('');
+    const [sobrenome, setSobrenome] = useState('');
+    const [email, setEmail] = useState('');
 
     const login = useGoogleLogin({
         onSuccess: (codeResponse) => setUser(codeResponse),
@@ -22,7 +25,10 @@ export default function LoginGoogle(){
                         }
                     })
                     .then((res) => {
-                        setProfile(res.data);
+                        setNome(res.data.given_name)
+                        setSobrenome(res.data.family_name)
+                        setEmail(res.data.email)
+                        googleLogout();
                     })
                     .catch((err) => console.log(err));
             }
@@ -30,30 +36,12 @@ export default function LoginGoogle(){
         [ user ]
     );
 
-    // log out function to log the user out of google and set the profile array to null
-    const logOut = () => {
-        googleLogout();
-        setProfile(null);
-    };
-
     return (
         <div>
-            <h2>React Google Login</h2>
-            <br />
-            <br />
-            {profile ? (
-                <div>
-                    <h3>User Logged in</h3>
-                    <p>Name: {profile.name}</p>
-                    <p>{profile.given_name}</p>
-                    <p>{profile.family_name}</p>
-                    <p>Email Address: {profile.email}</p>
-                    <br />
-                    <button onClick={logOut}>Log out</button>
-                </div>
-            ) : (
-                <button onClick={() => login()}>Sign in with Google 🚀 </button>
-            )}
+            Nome:{nome}<br/>
+            Sobrenome:{sobrenome}<br/>
+            Email:{email}<br/>
+            <button onClick={() => login()}>Sign in with Google</button>
         </div>
     );
 }

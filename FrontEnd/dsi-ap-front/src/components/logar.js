@@ -1,11 +1,12 @@
 import logo from '../logo.svg';
 import { Link } from "react-router-dom"
 import '../App.css';
-import { useState } from 'react';
-import { useContext } from 'react';
+import { useState,useContext,useEffect } from 'react';
+import { googleLogout, useGoogleLogin} from '@react-oauth/google';
 import { UserContext } from '../context/UserContext';
 import { CodigoContext } from '../context/CodigoContext';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 //POST
 export default function Logar() {
   const{userId,ChangeUser}=useContext(UserContext)
@@ -15,7 +16,7 @@ export default function Logar() {
   const [retorno, setRetorno]=useState([])
   const [email, setEmail] = useState('');
   const [telefone, setTelefone] = useState('');
-  
+  const [ user, setUser ] = useState([]);
 
   const setEmailChange = (e) => {
     setEmail(e.target.value);
@@ -56,6 +57,32 @@ export default function Logar() {
     ChangeUser(data.id)
     return navigate("/usuario")
   }
+
+  const login = useGoogleLogin({
+    onSuccess: (codeResponse) => setUser(codeResponse),
+    onError: (error) => console.log('Login Failed:', error)
+  });
+
+  useEffect(
+      () => {
+          if (user) {
+              axios
+                  .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`, {
+                      headers: {
+                          Authorization: `Bearer ${user.access_token}`,
+                          Accept: 'application/json'
+                      }
+                  })
+                  .then((res) => {
+                      setEmail(res.data.email)
+                      googleLogout();
+                      logaremail()
+                  })
+                  .catch((err) => console.log(err));
+          }
+      },
+      [ user ]
+  );
   
   return (
     <div className="App">
@@ -69,6 +96,7 @@ export default function Logar() {
 
         <button onClick={logaremail}>Logar Com Email</button>
         <button onClick={logartelefone}>Logar Com Telefone</button>
+        <button onClick={() => login()}>Logar com Google</button>
       </div>
     </div>
   );

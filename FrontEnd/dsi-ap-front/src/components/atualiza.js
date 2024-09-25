@@ -1,8 +1,6 @@
 import { UserContext } from "../context/UserContext";
-import { useState } from "react"
-import { useContext } from "react"
-import { useEffect } from "react"
-import { useNavigate } from "react-router-dom";
+import { useState,useContext,useEffect } from "react"
+import { useNavigate,Link } from "react-router-dom";
 //POST
 export default function Atualiza() {
   const {userId}=useContext(UserContext)
@@ -86,6 +84,9 @@ export default function Atualiza() {
   
   return (
     <div className="App">
+      <Link to='/usuario'>
+        <button>Voltar</button>
+      </Link>
       <div>
         Nome: <input type='text' name='nome' 
         value={nome} onChange={setNomeChange} /><br/>

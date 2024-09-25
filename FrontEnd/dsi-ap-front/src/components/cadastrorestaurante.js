@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate,Link } from "react-router-dom"
 
 export default function CadastroRestaurante(){
     let navigate=useNavigate()
@@ -98,6 +98,9 @@ export default function CadastroRestaurante(){
 
     return(
         <>
+        <Link to='/restaurante'>
+        <button>Voltar</button>
+        </Link>
         <h1>Cadastro de Restaurante</h1>
         <form onSubmit={salvar}>
         <label>Nome Restaurante</label>
@@ -113,7 +116,7 @@ export default function CadastroRestaurante(){
         <label>Cidade</label>
         <input type="text" name="cidade" value={cidade} onChange={cidadeChange}/><br/>
         <label>CNPJ</label>
-        <input type="number" name="cnpj" value={cnpj} onChange={cnpjChange}/><br/>
+        <input type="number" name="cnpj" value={cnpj} onChange={cnpjChange} placeholder="XX.XXX.XXX/0001-XX"/><br/>
         <label>Especialidade</label>
         <input type="text" name="especialidade" value={especialidade} onChange={especialidadeChange}/><br/>
         <label>Razão Social</label>
