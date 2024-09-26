@@ -1,4 +1,4 @@
-import { UserContext } from "../context/UserContext";
+import { UserContext } from "../../context/UserContext";
 import { useState,useContext,useEffect } from "react"
 import { useNavigate,Link } from "react-router-dom";
 //POST

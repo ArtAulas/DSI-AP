@@ -1,10 +1,10 @@
-import logo from '../logo.svg';
+import logo from '../../logo.svg';
 import { Link } from "react-router-dom"
-import '../App.css';
+import '../../App.css';
 import { useState,useContext,useEffect } from 'react';
 import { googleLogout, useGoogleLogin} from '@react-oauth/google';
-import { UserContext } from '../context/UserContext';
-import { CodigoContext } from '../context/CodigoContext';
+import { UserContext } from '../../context/UserContext';
+import { CodigoContext } from '../../context/CodigoContext';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 //POST

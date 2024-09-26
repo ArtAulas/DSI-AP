@@ -1,4 +1,4 @@
-import Logar from "../components/logar"
+import Logar from "../components/usuario/logar"
 import { Link } from "react-router-dom"
 export default function Login(){
     return(

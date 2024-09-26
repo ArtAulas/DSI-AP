@@ -1,5 +1,5 @@
 import { useState, useContext } from "react"
-import { UserContext } from "../context/UserContext"
+import { UserContext } from "../../context/UserContext"
 import { useNavigate,Link } from "react-router-dom"
 
 export default function CadastroEndereco(){

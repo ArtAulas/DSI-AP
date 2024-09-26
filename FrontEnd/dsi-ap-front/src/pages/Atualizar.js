@@ -1,4 +1,4 @@
-import Atualiza from "../components/atualiza"
+import Atualiza from "../components/usuario/atualiza"
 
 export default function AtualizaPage(){
     return(

@@ -15,6 +15,10 @@ export default function PaginaInicial(){
         busca();
         },[]);
 
+    function handleClick(e){
+        console.log(e.target.value)
+    }
+
     return(
         <>
         <nav>
@@ -28,7 +32,6 @@ export default function PaginaInicial(){
         {retorno.map(item=>{
             return(
                 <ul key={item.id}>
-                    <li key={item.id+'id'}>ID: {item.id_restaurante}</li>
                     <b>Informações Básicas:</b>
                     <li key={item.id+'nome'}>Nome: {item.nome_restaurante}</li>
                     <li key={item.id+'especi'}>Escpecialidade: {item.especialidade_restaurante}</li>
@@ -44,6 +47,7 @@ export default function PaginaInicial(){
                     <b>Plano de Entrega:</b>
                     {item.plano_basico_restaurante ? (<li key={item.id+'plano'}>Plano Básico</li>)
                     :(<li key={item.id+'plano'}>Plano Entrega</li>)}
+                    <button onClick={handleClick} value={item.id_restaurante}>Visualizar Página do Restaurante</button>
                 </ul>
             )
         })}</div>

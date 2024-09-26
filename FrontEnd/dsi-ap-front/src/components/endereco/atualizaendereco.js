@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from "react"
-import { UserContext } from "../context/UserContext"
+import { UserContext } from "../../context/UserContext"
 import { useNavigate,Link } from "react-router-dom"
-import { EnderecoContext } from "../context/EnderecoContext"
+import { EnderecoContext } from "../../context/EnderecoContext"
 
 export default function AtualizaEndereco(){
     let navigate=useNavigate()

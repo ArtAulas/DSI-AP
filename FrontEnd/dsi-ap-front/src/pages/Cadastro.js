@@ -1,4 +1,4 @@
-import Cadastro from "../components/cadastrar"
+import Cadastro from "../components/usuario/cadastrar"
 import { Link } from "react-router-dom"
 
 export default function CadastroPage(){

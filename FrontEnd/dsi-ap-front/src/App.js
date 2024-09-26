@@ -10,15 +10,19 @@ import { UserProvider } from './context/UserContext';
 import ValidarCodigo from './components/loginEmail';
 import { CodigoProvider } from './context/CodigoContext';
 import { EnderecoProvider } from './context/EnderecoContext';
-import CadastroEndereco from './components/cadastrarendereco';
-import CadastroRestaurante from './components/cadastrorestaurante';
+import CadastroEndereco from './components/endereco/cadastrarendereco';
+import CadastroRestaurante from './components/restaurantes/cadastrorestaurante';
 import RestaurantePage from './pages/PaginaRestaurante';
 import LoginGoogle from './components/logingoogle';
-import ListaRestaurante from './components/listagemrestaurante';
-import AtualizaRestaurante from './components/atualizarestaurante';
-import DeletaRestaurante from './components/deletarestaurante';
-import AtualizaEndereco from './components/atualizaendereco';
+import ListaRestaurante from './components/restaurantes/listagemrestaurante';
+import AtualizaRestaurante from './components/restaurantes/atualizarestaurante';
+import DeletaRestaurante from './components/restaurantes/deletarestaurante';
+import AtualizaEndereco from './components/endereco/atualizaendereco';
 import PaginaInicial from './pages/PaginaInicial';
+import ListaProdutos from './components/produtos/listaprodutos';
+import CadastroProdutos from './components/produtos/cadastroprodutos';
+import DeletaProduto from './components/produtos/deletarproduto';
+import AtualizarProdutos from './components/produtos/atualizaproduto';
 
 function App() {
   return (
@@ -27,6 +31,10 @@ function App() {
       <CodigoProvider>
       <Router>
       <Routes>
+        <Route path='/atualizaproduto' element={<AtualizarProdutos/>}/>
+        <Route path='/deletarproduto' element={<DeletaProduto/>}/>
+        <Route path='/cadastroproduto' element={<CadastroProdutos/>}/>
+        <Route path='/listaprodutos' element={<ListaProdutos/>}/>
         <Route path='/paginainicial' element={<PaginaInicial/>}/>
         <Route path='/atualizaendereco' element={<AtualizaEndereco/>}/>
         <Route path='/deletarestaurante' element={<DeletaRestaurante/>}/>

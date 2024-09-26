@@ -1,5 +1,5 @@
-import logo from '../logo.svg';
-import '../App.css';
+import logo from '../../logo.svg';
+import '../../App.css';
 import { useState,useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { googleLogout, useGoogleLogin} from '@react-oauth/google';
@@ -14,7 +14,7 @@ export default function Cadastro() {
   const [sobrenome, setSobrenome] = useState('');
   const [email, setEmail] = useState('');
   const [telefone, setTelefone] = useState('');
-  const [cpf,setCPF]=useState('')
+  const [cpf,setCPF]=useState(0)
 
   const setNomeChange = (e) => {
     setNome(e.target.value);
@@ -108,7 +108,7 @@ export default function Cadastro() {
         Telefone: <input type='text' name='telefone' 
         value={telefone} onChange={setTelefoneChange} /><br/>
 
-        CPF: <input type='text' name='cpf' 
+        CPF: <input type='number' name='cpf' 
         value={cpf} onChange={setCPFChange} placeholder='XXX.XXX.XXX-XX'/><br/>
 
         <button onClick={salvar}>Cadastrar</button>

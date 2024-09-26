@@ -1,6 +1,6 @@
 import { useContext, useState,useEffect } from "react";
-import { UserContext } from "../context/UserContext";
-import { EnderecoContext } from "../context/EnderecoContext";
+import { UserContext } from "../../context/UserContext";
+import { EnderecoContext } from "../../context/EnderecoContext";
 import { useNavigate } from "react-router-dom";
 
 export default function ListaEndereco(){
