@@ -24,7 +24,7 @@ export default function ListaRestaurante(){
                     <li key={item.id+'id'}>ID: {item.id_restaurante}</li>
                     <b>Informações Básicas:</b>
                     <li key={item.id+'nome'}>Nome: {item.nome_restaurante}</li>
-                    <li key={item.id+'especi'}>Escpecialidade: {item.especialidade_restaurante}</li>
+                    <li key={item.id+'especi'}>Especialidade: {item.especialidade_restaurante}</li>
                     <b>Informações Legais:</b>
                     <li key={item.id+'razao'}>Razão Social: {item.razao_social_restaurante}</li>
                     <li key={item.id+'cnpj'}>CNPJ: {item.cnpj_restaurante}</li>

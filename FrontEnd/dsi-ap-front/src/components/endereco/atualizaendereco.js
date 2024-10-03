@@ -52,9 +52,9 @@ export default function AtualizaEndereco(){
             return console.log(casa,trabalho)
         }
 
-        let url='http://127.0.0.1:8003/endereco/cadastrar'
+        let url='http://127.0.0.1:8003/endereco/atualizar/'+enderecoId
         let api=await fetch(url,{
-            method:"POST",
+            method:"PUT",
             headers:{
                 "Content-Type": "application/json"
             },

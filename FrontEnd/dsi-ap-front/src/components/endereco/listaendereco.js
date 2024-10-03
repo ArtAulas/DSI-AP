@@ -55,6 +55,7 @@ export default function ListaEndereco(){
             return(
                 <ul key={item.id}>
                     <li key={item.id+'endereco'}>{item.logradouro} {item.numero}, {item.complemento}</li>
+                    <li key={item.id+'ref'}>Ponto de Referência: {item.ponto_de_referencia}</li>
                     <li key={item.id+'tipo'}>Tipo de Residência:
                         {item.endereco_casa ? (<>Casa</>) : (<></>)} 
                         {item.endereco_trabalho ? (<>Trabalho</>): (<></>)}

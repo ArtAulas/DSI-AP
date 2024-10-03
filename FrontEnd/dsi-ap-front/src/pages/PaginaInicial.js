@@ -1,8 +1,11 @@
-import { useState,useEffect } from "react"
-import { Link } from "react-router-dom"
+import { useState,useEffect,useContext } from "react"
+import { Link,useNavigate } from "react-router-dom"
+import { IdRestContext } from "../context/IdRestauranteContext"
 
 export default function PaginaInicial(){
-    const[retorno,setRetorno]=useState([])
+    let navigate=useNavigate()
+    const {ChangeRest}=useContext(IdRestContext)
+    const [retorno,setRetorno]=useState([])
 
     const busca=async()=>{
         let url='http://127.0.0.1:8003/restaurantes/buscar'
@@ -11,12 +14,18 @@ export default function PaginaInicial(){
         setRetorno(lista)
     }
 
+    const resetaRest=()=>{
+        ChangeRest(0)
+    }
+
     useEffect(() => {
         busca();
+        resetaRest();
         },[]);
 
-    function handleClick(e){
-        console.log(e.target.value)
+    function RedirecionaRestaurante(e){
+        ChangeRest(e.target.value)
+        navigate('/pagina_restaurante')
     }
 
     return(
@@ -47,7 +56,7 @@ export default function PaginaInicial(){
                     <b>Plano de Entrega:</b>
                     {item.plano_basico_restaurante ? (<li key={item.id+'plano'}>Plano Básico</li>)
                     :(<li key={item.id+'plano'}>Plano Entrega</li>)}
-                    <button onClick={handleClick} value={item.id_restaurante}>Visualizar Página do Restaurante</button>
+                    <button onClick={RedirecionaRestaurante} value={item.id_restaurante}>Visualizar Página do Restaurante</button>
                 </ul>
             )
         })}</div>

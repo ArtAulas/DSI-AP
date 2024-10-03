@@ -10,9 +10,10 @@ import { UserProvider } from './context/UserContext';
 import ValidarCodigo from './components/loginEmail';
 import { CodigoProvider } from './context/CodigoContext';
 import { EnderecoProvider } from './context/EnderecoContext';
+import { IdRestProvider } from './context/IdRestauranteContext';
 import CadastroEndereco from './components/endereco/cadastrarendereco';
 import CadastroRestaurante from './components/restaurantes/cadastrorestaurante';
-import RestaurantePage from './pages/PaginaRestaurante';
+import RestauranteOpcoesPage from './pages/PaginaOpcoesRestaurante';
 import LoginGoogle from './components/logingoogle';
 import ListaRestaurante from './components/restaurantes/listagemrestaurante';
 import AtualizaRestaurante from './components/restaurantes/atualizarestaurante';
@@ -23,14 +24,17 @@ import ListaProdutos from './components/produtos/listaprodutos';
 import CadastroProdutos from './components/produtos/cadastroprodutos';
 import DeletaProduto from './components/produtos/deletarproduto';
 import AtualizarProdutos from './components/produtos/atualizaproduto';
+import PaginaRestaurante from './pages/PaginaRestaurante';
 
 function App() {
   return (
     <UserProvider>
       <EnderecoProvider>
       <CodigoProvider>
+        <IdRestProvider>
       <Router>
       <Routes>
+        <Route path='/pagina_restaurante' element={<PaginaRestaurante/>}/>
         <Route path='/atualizaproduto' element={<AtualizarProdutos/>}/>
         <Route path='/deletarproduto' element={<DeletaProduto/>}/>
         <Route path='/cadastroproduto' element={<CadastroProdutos/>}/>
@@ -40,7 +44,7 @@ function App() {
         <Route path='/deletarestaurante' element={<DeletaRestaurante/>}/>
         <Route path='/atualizarestaurante' element={<AtualizaRestaurante/>}/>
         <Route path='/listarestaurante' element={<ListaRestaurante/>}/>
-        <Route path='/restaurante' element={<RestaurantePage/>}/>
+        <Route path='/restaurante' element={<RestauranteOpcoesPage/>}/>
         <Route path='/cadastrorestaurante' element={<CadastroRestaurante/>}/>
         <Route path='/cadastroendereco' element={<CadastroEndereco/>}/>
         <Route path='/loginemail' element={<ValidarCodigo/>}/>
@@ -52,6 +56,7 @@ function App() {
         <Route path='/logingoogle' element={<LoginGoogle/>}/>
       </Routes>
       </Router>
+      </IdRestProvider>
       </CodigoProvider>
       </EnderecoProvider>
     </UserProvider>

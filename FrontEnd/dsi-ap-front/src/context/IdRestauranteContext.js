@@ -9,7 +9,7 @@ export const IdRestProvider= ({children})=>{
         setRestId(valor)
     }
 
-    return(<UserContext.Provider value={{restId, ChangeRest}}>{children}</UserContext.Provider>)
+    return(<IdRestContext.Provider value={{restId, ChangeRest}}>{children}</IdRestContext.Provider>)
         
     
 }

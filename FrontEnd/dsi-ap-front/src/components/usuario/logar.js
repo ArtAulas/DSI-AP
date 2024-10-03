@@ -55,7 +55,7 @@ export default function Logar() {
     }
     setRetorno(data)
     ChangeUser(data.id)
-    return navigate("/usuario")
+    return navigate("/paginainicial")
   }
 
   const login = useGoogleLogin({
@@ -76,7 +76,6 @@ export default function Logar() {
                   .then((res) => {
                       setEmail(res.data.email)
                       googleLogout();
-                      logaremail()
                   })
                   .catch((err) => console.log(err));
           }

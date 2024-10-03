@@ -17,8 +17,27 @@ export default function ValidarCodigo() {
 	}
 	let navigate = useNavigate();
 
-	let email= 'carelliarthur8@gmail.com';
-	let nome='Art';
+	let email= '';
+	let nome='';
+
+	const enviaEmail=()=>{
+	let num=codigo
+
+	var templateParams = {
+		user_name:nome,
+		user_email:email,
+		message:num
+	  };
+	  
+	emailjs.send('service_kgrhjxr', 'template_48e1k3a', templateParams,'JJm5KOCL3j8ImEgu5').then(
+		(response) => {
+			console.log('SUCCESS!', response.status, response.text);
+		},
+		(error) => {
+			console.log('FAILED...', error);
+		},
+	);
+	}
 
 	const GetUserInfo=async()=>{
 		let api = await fetch('http://127.0.0.1:8003/usuarios/buscar/id/'+userId)
@@ -26,28 +45,12 @@ export default function ValidarCodigo() {
 		console.log('data', data)
 		nome=data.nome;
 		email=data.email;
+		enviaEmail()
 	  }
 	
 	  useEffect(() => {
 		GetUserInfo();
 		},[]);
-
-	let num=codigo
-
-	// var templateParams = {
-	// 	user_name:nome,
-	// 	user_email:email,
-	// 	message:num
-	//   };
-	  
-	// emailjs.send('service_kgrhjxr', 'template_48e1k3a', templateParams,'JJm5KOCL3j8ImEgu5').then(
-	// 	(response) => {
-	// 		console.log('SUCCESS!', response.status, response.text);
-	// 	},
-	// 	(error) => {
-	// 		console.log('FAILED...', error);
-	// 	},
-	// );
 
 	const confirmarCodigo=()=>{
 		if (codigo==codigoTeste){
