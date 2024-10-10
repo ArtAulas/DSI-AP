@@ -32,7 +32,7 @@ export default function Logar() {
     console.log(url)
     let data = await api.json();
     console.log(data)
-    if (api.status===404){
+    if (api.status==404){
         setRetorno([])
         return alert('Usuario não encontrado')
     }
@@ -51,7 +51,7 @@ export default function Logar() {
     console.log(data)
     if (api.status===404){
         setRetorno([])
-        return alert('ID não encontrado')
+        return alert('Usuario não encontrado')
     }
     setRetorno(data)
     ChangeUser(data.id)
