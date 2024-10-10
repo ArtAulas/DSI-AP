@@ -11,6 +11,7 @@ import ValidarCodigo from './components/loginEmail';
 import { CodigoProvider } from './context/CodigoContext';
 import { EnderecoProvider } from './context/EnderecoContext';
 import { IdRestProvider } from './context/IdRestauranteContext';
+import { IdPedidoProvider } from './context/IdPedidoContext';
 import CadastroEndereco from './components/endereco/cadastrarendereco';
 import CadastroRestaurante from './components/restaurantes/cadastrorestaurante';
 import RestauranteOpcoesPage from './pages/PaginaOpcoesRestaurante';
@@ -25,40 +26,44 @@ import CadastroProdutos from './components/produtos/cadastroprodutos';
 import DeletaProduto from './components/produtos/deletarproduto';
 import AtualizarProdutos from './components/produtos/atualizaproduto';
 import PaginaRestaurante from './pages/PaginaRestaurante';
+import PedidoPage from './pages/Pedido';
 
 function App() {
   return (
     <UserProvider>
-      <EnderecoProvider>
-      <CodigoProvider>
-        <IdRestProvider>
+    <EnderecoProvider>
+    <CodigoProvider>
+    <IdRestProvider>
+    <IdPedidoProvider>
       <Router>
-      <Routes>
-        <Route path='/pagina_restaurante' element={<PaginaRestaurante/>}/>
-        <Route path='/atualizaproduto' element={<AtualizarProdutos/>}/>
-        <Route path='/deletarproduto' element={<DeletaProduto/>}/>
-        <Route path='/cadastroproduto' element={<CadastroProdutos/>}/>
-        <Route path='/listaprodutos' element={<ListaProdutos/>}/>
-        <Route path='/paginainicial' element={<PaginaInicial/>}/>
-        <Route path='/atualizaendereco' element={<AtualizaEndereco/>}/>
-        <Route path='/deletarestaurante' element={<DeletaRestaurante/>}/>
-        <Route path='/atualizarestaurante' element={<AtualizaRestaurante/>}/>
-        <Route path='/listarestaurante' element={<ListaRestaurante/>}/>
-        <Route path='/restaurante' element={<RestauranteOpcoesPage/>}/>
-        <Route path='/cadastrorestaurante' element={<CadastroRestaurante/>}/>
-        <Route path='/cadastroendereco' element={<CadastroEndereco/>}/>
-        <Route path='/loginemail' element={<ValidarCodigo/>}/>
-        <Route path='/' element={<HomePage/>}/>
-        <Route path='/login' element={<Login/>}/>
-        <Route path='/cadastro' element={<CadastroPage/>}/>
-        <Route path='/atualizar' element={<AtualizaPage/>}/>
-        <Route path='/usuario' element={<Usuario/>}/>
-        <Route path='/logingoogle' element={<LoginGoogle/>}/>
-      </Routes>
+        <Routes>
+          <Route path='/pedido' element={<PedidoPage/>}/>
+          <Route path='/pagina_restaurante' element={<PaginaRestaurante/>}/>
+          <Route path='/atualizaproduto' element={<AtualizarProdutos/>}/>
+          <Route path='/deletarproduto' element={<DeletaProduto/>}/>
+          <Route path='/cadastroproduto' element={<CadastroProdutos/>}/>
+          <Route path='/listaprodutos' element={<ListaProdutos/>}/>
+          <Route path='/paginainicial' element={<PaginaInicial/>}/>
+          <Route path='/atualizaendereco' element={<AtualizaEndereco/>}/>
+          <Route path='/deletarestaurante' element={<DeletaRestaurante/>}/>
+          <Route path='/atualizarestaurante' element={<AtualizaRestaurante/>}/>
+          <Route path='/listarestaurante' element={<ListaRestaurante/>}/>
+          <Route path='/restaurante' element={<RestauranteOpcoesPage/>}/>
+          <Route path='/cadastrorestaurante' element={<CadastroRestaurante/>}/>
+          <Route path='/cadastroendereco' element={<CadastroEndereco/>}/>
+          <Route path='/loginemail' element={<ValidarCodigo/>}/>
+          <Route path='/' element={<HomePage/>}/>
+          <Route path='/login' element={<Login/>}/>
+          <Route path='/cadastro' element={<CadastroPage/>}/>
+          <Route path='/atualizar' element={<AtualizaPage/>}/>
+          <Route path='/usuario' element={<Usuario/>}/>
+          <Route path='/logingoogle' element={<LoginGoogle/>}/>
+        </Routes>
       </Router>
-      </IdRestProvider>
-      </CodigoProvider>
-      </EnderecoProvider>
+    </IdPedidoProvider>
+    </IdRestProvider>
+    </CodigoProvider>
+    </EnderecoProvider>
     </UserProvider>
   );
 }

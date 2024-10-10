@@ -1,10 +1,14 @@
 import { useState,useEffect,useContext } from "react"
 import { Link,useNavigate } from "react-router-dom"
 import { IdRestContext } from "../context/IdRestauranteContext"
+import { IdPedidoContext } from "../context/IdPedidoContext"
+import { UserContext } from "../context/UserContext"
 
 export default function PaginaInicial(){
     let navigate=useNavigate()
     const {ChangeRest}=useContext(IdRestContext)
+    const {pedidoId, ChangePedido}=useContext(IdPedidoContext)
+    const {userId, ChangeUser}=useContext(UserContext)
     const [retorno,setRetorno]=useState([])
 
     const busca=async()=>{
@@ -18,9 +22,48 @@ export default function PaginaInicial(){
         ChangeRest(0)
     }
 
+    const verificaPedido=async()=>{
+        let pedido=await fetch('http://127.0.0.1:8003/pedidos/buscar/id_user_status/'+userId);
+        let retorno=await pedido.json()
+
+        if (retorno==null){
+            let url='http://127.0.0.1:8003/pedidos/inserir'
+            let api=await fetch(url,{
+            method:"POST",
+            headers:{
+                "Content-Type": "application/json"
+            },
+            body:JSON.stringify({
+                "forma_de_pagamento": 0,
+                "id_usuario": userId,
+                "id_endereco": 0,
+                "id_restaurante": 0,
+                "pagamento_gorjeta": 0,
+                "cpf_na_nota": 0,
+                "codigo_cupom": "",
+                "entrega_padrao": true,
+                "entrega_agendada": true,
+                "retirar_na_loja": true,
+                "total_produtos": 0,
+                "taxa_servico": 0,
+                "data_e_hora_pedido": "",
+                "total_pedido": 0,
+                "status": "Aberto"
+              })
+        })
+        if (api.ok){
+            pedido=await fetch('http://127.0.0.1:8003/pedidos/buscar/id_user_status/'+userId)
+            retorno=await pedido.json()
+        }
+        }
+        console.log(retorno.id_pedido)
+        ChangePedido(retorno.id_pedido)
+    }
+
     useEffect(() => {
         busca();
         resetaRest();
+        verificaPedido();
         },[]);
 
     function RedirecionaRestaurante(e){
@@ -33,6 +76,9 @@ export default function PaginaInicial(){
         <nav>
             <Link to='/usuario'>
             <button>Dados de Usuário</button>
+            </Link>
+            <Link to='/pedido'>
+            <button>Ver Pedido</button>
             </Link>
         </nav>
         <main>

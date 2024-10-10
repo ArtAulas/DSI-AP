@@ -1,9 +1,11 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routes.routes_usuario import router as router1
-from routes.routes_endereco import router as router2
-from routes.routes_restaurante import router as router3
-from routes.routes_produto import router as router4
+from routes.routes_usuario import router as usuario
+from routes.routes_endereco import router as endereco
+from routes.routes_restaurante import router as restaurante
+from routes.routes_produto import router as produto
+from routes.routes_pedido import router as pedidos
+from routes.routes_item_pedido import router as item_pedido
 app=FastAPI()
 
 origins = ["*"]
@@ -20,10 +22,12 @@ app.add_middleware(
 def helloworld():
     return 'Hello World'
 
-app.include_router(router1)
-app.include_router(router2)
-app.include_router(router3)
-app.include_router(router4)
+app.include_router(usuario)
+app.include_router(endereco)
+app.include_router(restaurante)
+app.include_router(produto)
+app.include_router(pedidos)
+app.include_router(item_pedido)
 
 if __name__=='__main__':
     import uvicorn

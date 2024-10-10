@@ -22,6 +22,7 @@ class Pedido(Base):
     taxa_servico=Column('taxa_servicos',Float,nullable=False)
     data_e_hora_pedido=Column('data_e_hora_pedido',String(255),nullable=False, default=datetime.now())
     total_pedido=Column('total_pedido',Float,nullable=False)
+    status=Column('status',String(255))
 
 class PedidoRequest(BaseModel):
     forma_de_pagamento:int
@@ -38,6 +39,7 @@ class PedidoRequest(BaseModel):
     taxa_servico:float
     data_e_hora_pedido:str
     total_pedido:float
+    status:str
 
 class PedidoResponse(BaseModel):
     id_pedido:int
@@ -55,6 +57,7 @@ class PedidoResponse(BaseModel):
     taxa_servico:float
     data_e_hora_pedido:str
     total_pedido:float
+    status:str
 
     class Config:
         from_attributes=True

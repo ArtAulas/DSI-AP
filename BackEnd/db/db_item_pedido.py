@@ -2,7 +2,7 @@ from sqlalchemy import Column, Integer, String, Boolean, Float, ForeignKey
 from pydantic import BaseModel
 from db_config import Base
 
-class Item_Pedido(BaseModel):
+class ItemPedido(Base):
     __tablename__='item_pedido'
     id_item_pedido=Column('id_item_pedido',Integer, primary_key=True, autoincrement=True)
 
@@ -19,7 +19,7 @@ class ItemPedidoRequest(BaseModel):
     quantidade_produto:int
     id_pedido:int
 
-class ItemPedidoRequest(BaseModel):
+class ItemPedidoResponse(BaseModel):
     id_item_pedido:int
     id_produto:int
     preco_produto:float
