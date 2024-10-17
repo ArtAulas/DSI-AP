@@ -1,13 +1,20 @@
-import logo from '../logo.svg';
-import '../App.css';
-import { useState } from 'react';
+import logo from '../../logo.svg';
+import '../../App.css';
+import { useState,useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { googleLogout, useGoogleLogin} from '@react-oauth/google';
+import axios from 'axios';
+
 //POST
 export default function Cadastro() {
+  let navigate = useNavigate();
+  const [ user, setUser ] = useState([]);
+
   const [nome, setNome] = useState('');
   const [sobrenome, setSobrenome] = useState('');
   const [email, setEmail] = useState('');
   const [telefone, setTelefone] = useState('');
-  const [cpf,setCPF]=useState('')
+  const [cpf,setCPF]=useState(0)
 
   const setNomeChange = (e) => {
     setNome(e.target.value);
@@ -30,6 +37,10 @@ export default function Cadastro() {
   }
 
   const salvar= async()=>{
+    if(telefone==''){
+      return alert('Informe um Telefone')
+    }
+
     let api = await fetch('http://127.0.0.1:8003/usuarios/inserir',{
       method:"POST",
       headers:{
@@ -48,11 +59,39 @@ export default function Cadastro() {
     let data = await api.json();
     console.log(data)
     if(api.ok){
-      return alert("Cadastro ok")
+      alert("Cadastro ok")
+      return navigate('/login')
     }else{
       return alert("Erro ao cadastrar")
     }
   }
+
+  const login = useGoogleLogin({
+    onSuccess: (codeResponse) => setUser(codeResponse),
+    onError: (error) => console.log('Login Failed:', error)
+  });
+
+  useEffect(
+      () => {
+          if (user) {
+              axios
+                  .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`, {
+                      headers: {
+                          Authorization: `Bearer ${user.access_token}`,
+                          Accept: 'application/json'
+                      }
+                  })
+                  .then((res) => {
+                      setNome(res.data.given_name)
+                      setSobrenome(res.data.family_name)
+                      setEmail(res.data.email)
+                      googleLogout();
+                  })
+                  .catch((err) => console.log(err));
+          }
+      },
+      [ user ]
+  );
   
   return (
     <div className="App">
@@ -69,11 +108,12 @@ export default function Cadastro() {
         Telefone: <input type='text' name='telefone' 
         value={telefone} onChange={setTelefoneChange} /><br/>
 
-        CPF: <input type='text' name='cpf' 
+        CPF: <input type='number' name='cpf' 
         value={cpf} onChange={setCPFChange} placeholder='XXX.XXX.XXX-XX'/><br/>
 
         <button onClick={salvar}>Cadastrar</button>
       </div>
+      <button onClick={() => login()}>Logar com Google</button>
     </div>
   );
 }

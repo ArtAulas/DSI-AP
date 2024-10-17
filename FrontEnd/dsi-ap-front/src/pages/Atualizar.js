@@ -1,9 +1,9 @@
-import Atualiza from "../components/atualiza"
+import Atualiza from "../components/usuario/atualiza"
 
-export default function AtualizaPage(id){
+export default function AtualizaPage(){
     return(
         <>
-        <Atualiza id={id}/>
+        <Atualiza/>
         </>
     )
 }

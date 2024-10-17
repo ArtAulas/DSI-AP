@@ -1,1 +1,7 @@
+<<<<<<< HEAD
 DSI-AP.db
+=======
+/venv
+DSI-AP.db
+__pycache__/
+>>>>>>> dc2a7ae980cd89bbc9caf106c41282aa1296a7ca
