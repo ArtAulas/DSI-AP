@@ -7,7 +7,7 @@ export default function PaginaRestaurante(){
     return(
         <>
         <Link to='/paginainicial'>
-        <button>Voltar</button>
+        <button>Página Inicial</button>
         </Link><br/>
         <RestauranteUnico/><br/>
         <h2>Produtos Disponíveis:</h2>

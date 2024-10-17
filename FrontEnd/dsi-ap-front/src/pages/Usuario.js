@@ -52,7 +52,7 @@ export default function Usuario(){
     return(
         <>
         <Link to='/paginainicial'>
-        <button>Voltar</button>
+        <button>Página Inicial</button>
         </Link>
         <h1>Dados do Usuário</h1>
         <ul>

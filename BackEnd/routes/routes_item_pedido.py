@@ -47,3 +47,8 @@ def apagarId(id:int, db:Session=Depends(get_db)):
 def buscarId(id:int, db:Session=Depends(get_db)):
     itens_pedido=db.query(ItemPedido).filter(ItemPedido.id_pedido==id).all()
     return [ItemPedidoResponse.model_validate(item) for item in itens_pedido]
+
+@router.get("/buscar/pedido_produto/{produto}/{pedido}")#Read
+def buscarId(pedido:int,produto:int, db:Session=Depends(get_db)):
+    itens_pedido=db.query(ItemPedido).filter(ItemPedido.id_pedido==pedido,ItemPedido.id_produto==produto).first()
+    return itens_pedido

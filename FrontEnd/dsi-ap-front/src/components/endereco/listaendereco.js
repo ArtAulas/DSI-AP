@@ -41,6 +41,7 @@ export default function ListaEndereco(){
             },
           })
           alert('Endereco Deletado')
+          navigate('/auxiliar')
     }
     
     const DirecionaAtualiza=(e)=>{
@@ -53,7 +54,7 @@ export default function ListaEndereco(){
         <h2>Endereços Do Usuário</h2>
         {retorno.map(item=>{
             return(
-                <ul key={item.id}>
+                <ul key={item.id} className="lista_enderecos">
                     <li key={item.id+'endereco'}>{item.logradouro} {item.numero}, {item.complemento}</li>
                     <li key={item.id+'ref'}>Ponto de Referência: {item.ponto_de_referencia}</li>
                     <li key={item.id+'tipo'}>Tipo de Residência:

@@ -8,6 +8,7 @@ class ItemPedido(Base):
 
     id_produto=Column('id_produto',ForeignKey('produto.id_produto'),nullable=False)
 
+    nome_produto=Column('nome_produto',String(255),nullable=False)
     preco_produto=Column('preco_produto',Float,nullable=False)
     quantidade_produto=Column('quantidade_produto',Integer,nullable=False)
 
@@ -15,6 +16,7 @@ class ItemPedido(Base):
 
 class ItemPedidoRequest(BaseModel):
     id_produto:int
+    nome_produto:str
     preco_produto:float
     quantidade_produto:int
     id_pedido:int
@@ -22,6 +24,7 @@ class ItemPedidoRequest(BaseModel):
 class ItemPedidoResponse(BaseModel):
     id_item_pedido:int
     id_produto:int
+    nome_produto:str
     preco_produto:float
     quantidade_produto:int
     id_pedido:int

@@ -66,7 +66,7 @@ export default function AtualizarProdutos(){
     <Link to='/restaurante'>
         <button>Voltar</button>
     </Link>
-    <h1>Cadastro de Produto</h1>
+    <h1>Atualização de Produto</h1>
     <form onSubmit={salvar}>
         <label>ID</label>
         <input type="number" name='id' value={id} onChange={idChange}></input><br/>

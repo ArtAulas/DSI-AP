@@ -86,7 +86,7 @@ export default function PaginaInicial(){
         <div id="lista">
         {retorno.map(item=>{
             return(
-                <ul key={item.id}>
+                <ul key={item.id} className="restaurantes_lista">
                     <b>Informações Básicas:</b>
                     <li key={item.id+'nome'}>Nome: {item.nome_restaurante}</li>
                     <li key={item.id+'especi'}>Escpecialidade: {item.especialidade_restaurante}</li>

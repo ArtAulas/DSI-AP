@@ -12,6 +12,7 @@ import { CodigoProvider } from './context/CodigoContext';
 import { EnderecoProvider } from './context/EnderecoContext';
 import { IdRestProvider } from './context/IdRestauranteContext';
 import { IdPedidoProvider } from './context/IdPedidoContext';
+import { IdRestPedidoProvider } from './context/RestaurantePedidoContext';
 import CadastroEndereco from './components/endereco/cadastrarendereco';
 import CadastroRestaurante from './components/restaurantes/cadastrorestaurante';
 import RestauranteOpcoesPage from './pages/PaginaOpcoesRestaurante';
@@ -27,6 +28,7 @@ import DeletaProduto from './components/produtos/deletarproduto';
 import AtualizarProdutos from './components/produtos/atualizaproduto';
 import PaginaRestaurante from './pages/PaginaRestaurante';
 import PedidoPage from './pages/Pedido';
+import Auxiliar from './pages/AuxiliarPage';
 
 function App() {
   return (
@@ -35,8 +37,10 @@ function App() {
     <CodigoProvider>
     <IdRestProvider>
     <IdPedidoProvider>
+    <IdRestPedidoProvider>
       <Router>
         <Routes>
+          <Route path='/auxiliar' element={<Auxiliar/>}/>
           <Route path='/pedido' element={<PedidoPage/>}/>
           <Route path='/pagina_restaurante' element={<PaginaRestaurante/>}/>
           <Route path='/atualizaproduto' element={<AtualizarProdutos/>}/>
@@ -60,6 +64,7 @@ function App() {
           <Route path='/logingoogle' element={<LoginGoogle/>}/>
         </Routes>
       </Router>
+    </IdRestPedidoProvider>
     </IdPedidoProvider>
     </IdRestProvider>
     </CodigoProvider>

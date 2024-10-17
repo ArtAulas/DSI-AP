@@ -44,14 +44,59 @@ form{
 #lista{
   align-items: center;
   justify-content: center;
-  display: flex;
 }
 
 body{
   justify-content: center;
-  display:flex
+  display:flex;
 }
 
 .dt_confirm{
   font-size: 0.75em;
+}
+
+.lista_itens_pedido, .lista_produtos ul{
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: lightgrey;
+}
+
+.lista_itens_pedido button{
+  background-color: grey;
+  color: white
+}
+
+.qtd_item{
+  display:inline-flex
+}
+
+.restaurantes_lista{
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: lightsalmon;
+}
+
+#lista ul{
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: lightgrey;
+}
+
+.restaurantes_lista button{
+  background-color: pink;
+}
+
+button{
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.lista_enderecos{
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+nav{
+  justify-content: space-between;
+  display:flex;
 }
