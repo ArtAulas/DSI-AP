@@ -100,3 +100,14 @@ nav{
   justify-content: space-between;
   display:flex;
 }
+
+div.info_restaurante{
+  justify-items: center;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: lightgrey;
+}
+
+p.info_endereco{
+  justify-self: center;
+}

@@ -1,11 +1,14 @@
 import { useContext,useEffect,useState } from "react"
 import { IdPedidoContext } from "../context/IdPedidoContext"
 import { IdRestPedidoContext } from "../context/RestaurantePedidoContext"
+import { EnderecoPedidoContext } from "../context/EnderecoPedido"
 import { Link,useNavigate } from "react-router-dom"
 
 export default function PedidoPage(){
     const {pedidoId}=useContext(IdPedidoContext)
     const{ChangeRestPedido}=useContext(IdRestPedidoContext)
+    const{enderecoPedidoId}=useContext(EnderecoPedidoContext)
+
     const [retorno, setRetorno]=useState([])
     let total=0
     const [total2, setTotal]=useState(0)
@@ -42,7 +45,7 @@ export default function PedidoPage(){
             if(retorno.length===1){
                 ChangeRestPedido(0)
             }
-            navigate("/auxiliar", { state: { from: 'pedido' } });
+            navigate("/auxiliar");
         }
     }
 
@@ -86,6 +89,16 @@ export default function PedidoPage(){
         }
     }
 
+    const confirmaFechar=()=>{
+        if (enderecoPedidoId==0){
+            return alert('Selecione um endereço primeiro')
+        }
+        if(retorno.length===0){
+            return alert('Pedido Vazio')
+        }
+        navigate('/fechapedido')
+    }
+
     return(
         <>
         <Link to='/paginainicial'>
@@ -103,11 +116,12 @@ export default function PedidoPage(){
                             {item.quantidade_produto}
                             <button class='qtd_item' value={[item.id_item_pedido,item.quantidade_produto+1]} onClick={alteraQtd}>+</button>
                         </li>
-                        <button value={item.id_item_pedido} onClick={ConfirmRemove}><b>Remover Item</b></button>
+                        <button value={item.id_item_pedido} onClick={ConfirmRemove}>Remover Item</button>
                     </ul>
                 )
             })}
         <p><b>Total da Compra:</b> R${total2.toFixed(2)}</p>
+        <button onClick={confirmaFechar}>Fechar Pedido</button>
         </>
     )
 }

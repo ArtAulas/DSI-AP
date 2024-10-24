@@ -41,6 +41,9 @@ class PedidoRequest(BaseModel):
     total_pedido:float
     status:str
 
+class PedidoPatch(BaseModel):
+    status:str
+
 class PedidoResponse(BaseModel):
     id_pedido:int
     forma_de_pagamento:int
