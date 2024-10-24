@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, Response
-from db.db_pedido import Pedido, PedidoRequest, PedidoResponse
+from db.db_pedido import Pedido, PedidoRequest, PedidoResponse, PedidoPatch
 from sqlalchemy.orm import Session
 from db_config import Base, engine, get_db
 Base.metadata.create_all(bind=engine)
@@ -56,4 +56,13 @@ def apagarId(id:int, db:Session=Depends(get_db)):
     if pedido is None:
         return Response(content='Pedido não encontrado',status_code=404)
     db.delete(pedido)
+    db.commit()
+
+@router.patch("/status/{id}")
+def patchStatus(id:int, request:PedidoPatch, db:Session=Depends(get_db)):
+    pedido_antigo=db.query(Pedido).filter(Pedido.id_pedido==id).first()
+    if pedido_antigo is None:
+        return Response(content='Pedido não encontrado',status_code=404)
+    pedido_antigo.status=dict(request)['status']
+    db.merge(pedido_antigo)
     db.commit()
