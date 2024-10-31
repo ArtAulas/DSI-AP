@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, Response
 from db.db_pedido import Pedido, PedidoRequest, PedidoResponse, PedidoPatch
+from db.db_restaurante import Restaurante
 from sqlalchemy.orm import Session
 from db_config import Base, engine, get_db
 Base.metadata.create_all(bind=engine)
@@ -39,6 +40,16 @@ def buscarId(id:int, db:Session=Depends(get_db)):
 def buscarId(id:int, db:Session=Depends(get_db)):
     pedido_aberto=db.query(Pedido).filter(Pedido.id_usuario==id, Pedido.status=='Aberto').first()
     return pedido_aberto
+
+@router.get("/buscar/id_user_restaurante/{id}")#Read
+def buscarId(id:int, db:Session=Depends(get_db)):
+    pedidos=db.query(Pedido,Restaurante.nome_restaurante).filter(Pedido.id_usuario==id,Pedido.id_restaurante==Restaurante.id_restaurante).all()
+    retorno=[]
+    for pedido in pedidos:
+        a=dict(PedidoResponse.model_validate(pedido[0]))
+        a['nome_restaurante']=pedido[1]
+        retorno.append(a)
+    return retorno
 
 @router.put("/atualizar/{id}")#Update
 def atualizarId(id:int, request:PedidoRequest, db:Session=Depends(get_db)):

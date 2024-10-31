@@ -9,7 +9,8 @@ export default function ConfigPedido(){
     let [total, setTotal]=useState(0)
     let [itens,setItens]=useState([])
     let [pedido,setPedido]=useState([])
-
+    let [status,setStatus]=useState('Preparo')
+    let opcoes=['Aberto','Aguardando Pagamento','Cancelado','Enviado ao Restaurante','Preparo','Separando','Saiu para Entrega','Entregue']
     const voltar=()=>{
         navigate(-1)
     }
@@ -56,9 +57,24 @@ export default function ConfigPedido(){
     }
 
     const mudaStatus=()=>{
-        let text='Insira o novo Status do Pedido'
-        let status=prompt(text)
-        patchPedido(status)
+        if (opcoes.includes(status)){
+            patchPedido(status)
+        }else{
+            alert('Status não pode ser atualizado')
+        }
+    }
+
+    function ConfirmaStatus(){
+        let text = "Confirma a alteração do status para "+status+"?";
+        if(window.confirm(text)===true){
+            mudaStatus()
+        }else{
+            alert('Você Cancelou a Operação')
+        }
+    }
+
+    function mostra(e){
+        setStatus(e.target.value)
     }
 
     return(
@@ -66,8 +82,14 @@ export default function ConfigPedido(){
         <button onClick={voltar}>Voltar</button>
         <h1>Informações do Pedido</h1>
         Data: {pedido.data_e_hora_pedido}<br/>
-        Status: {pedido.status}<br/>
-        <button onClick={mudaStatus}>Mudar Status</button>
+        Status Atual: {pedido.status}<br/>
+        <select onChange={mostra}>
+            <option>Preparo</option>
+            <option>Separando</option>
+            <option>Saiu para Entrega</option>
+            <option>Entregue</option>
+        </select>
+        <button onClick={ConfirmaStatus}>Mudar Status</button>
         <h2>Itens do Pedido:</h2>
         <div>
         {itens.map(item=>{

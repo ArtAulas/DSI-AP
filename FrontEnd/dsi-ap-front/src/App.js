@@ -15,6 +15,7 @@ import { IdPedidoProvider } from './context/IdPedidoContext';
 import { IdRestPedidoProvider } from './context/RestaurantePedidoContext';
 import { EnderecoPedidoProvider } from './context/EnderecoPedido';
 import { IdPedidoConfigProvider } from './context/IdPedidoConfigContext';
+import { IdPedidoPageProvider } from './context/IdPedidoPagina';
 import CadastroEndereco from './components/endereco/cadastrarendereco';
 import CadastroRestaurante from './components/restaurantes/cadastrorestaurante';
 import RestauranteOpcoesPage from './pages/PaginaOpcoesRestaurante';
@@ -34,6 +35,8 @@ import Auxiliar from './pages/AuxiliarPage';
 import FechaPedidoPage from './pages/FechamentoPedido';
 import GerenciaPedidos from './pages/GerenciaPedidos';
 import ConfigPedido from './pages/ConfigPedido';
+import HistoricoPedidos from './pages/HistoricoPedidos';
+import PedidoAntigo from './pages/PedidoAntigo';
 
 function App() {
   return (
@@ -45,8 +48,11 @@ function App() {
     <IdRestPedidoProvider>
     <EnderecoPedidoProvider>
     <IdPedidoConfigProvider>
+    <IdPedidoPageProvider>
       <Router>
         <Routes>
+          <Route path='/pedidoanterior' element={<PedidoAntigo/>}/>
+          <Route path='/todospedidos' element={<HistoricoPedidos/>}/>
           <Route path='/configpedido' element={<ConfigPedido/>}/>
           <Route path='/gerenciapedido' element={<GerenciaPedidos/>}/>
           <Route path='/fechapedido' element={<FechaPedidoPage/>}/>
@@ -74,6 +80,7 @@ function App() {
           <Route path='/logingoogle' element={<LoginGoogle/>}/>
         </Routes>
       </Router>
+    </IdPedidoPageProvider>
     </IdPedidoConfigProvider>
     </EnderecoPedidoProvider>
     </IdRestPedidoProvider>

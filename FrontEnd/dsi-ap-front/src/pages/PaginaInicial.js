@@ -97,7 +97,7 @@ export default function PaginaInicial(){
                     <li key={item.id+'tel'}>Telefone: {item.telefone_restaurante}</li>
                     <li key={item.id+'email'}>Email: {item.email_restaurante}</li>
                     <b>Localidade:</b>
-                    <li key={item.id+'cep'}>Cep: {item.cep_restaurante}</li>
+                    <li key={item.id+'cep'}>CEP: {item.cep_restaurante}</li>
                     <li key={item.id+'cidade'}>Cidade: {item.cidade_restaurante}, {item.estado_restaurante}</li>
                     <b>Plano de Entrega:</b>
                     {item.plano_basico_restaurante ? (<li key={item.id+'plano'}>Plano Básico</li>)

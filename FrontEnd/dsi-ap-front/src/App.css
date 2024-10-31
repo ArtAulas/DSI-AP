@@ -83,7 +83,8 @@ body{
 }
 
 .restaurantes_lista button{
-  background-color: pink;
+  color:white;
+  background-color: grey;
 }
 
 button{

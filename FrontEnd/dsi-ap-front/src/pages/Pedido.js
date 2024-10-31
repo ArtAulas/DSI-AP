@@ -101,10 +101,16 @@ export default function PedidoPage(){
 
     return(
         <>
+        <nav>
         <Link to='/paginainicial'>
         <button>Página Inicial</button>
         </Link>
-        <h1>Itens de Pedido</h1>
+        <Link to='/todospedidos'>
+        <button>Todos os Pedidos</button>
+        </Link>
+        </nav>
+        <h1>Pedido Atual</h1>
+        <h2>Itens de Pedido</h2>
         {retorno.map(item=>{
                 return(
                     <ul key={item.id} className="lista_itens_pedido">

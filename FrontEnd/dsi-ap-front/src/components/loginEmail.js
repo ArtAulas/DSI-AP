@@ -45,7 +45,7 @@ export default function ValidarCodigo() {
 		console.log('data', data)
 		nome=data.nome;
 		email=data.email;
-		// enviaEmail()
+		enviaEmail()
 	  }
 	
 	  useEffect(() => {
