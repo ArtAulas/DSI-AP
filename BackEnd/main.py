@@ -6,6 +6,7 @@ from routes.routes_restaurante import router as restaurante
 from routes.routes_produto import router as produto
 from routes.routes_pedido import router as pedidos
 from routes.routes_item_pedido import router as item_pedido
+from routes.routes_relatorios import router as relatorios
 app=FastAPI()
 
 origins = ["*"]
@@ -28,6 +29,7 @@ app.include_router(restaurante)
 app.include_router(produto)
 app.include_router(pedidos)
 app.include_router(item_pedido)
+app.include_router(relatorios)
 
 if __name__=='__main__':
     import uvicorn

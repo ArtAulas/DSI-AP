@@ -13,6 +13,9 @@ export default function HomePage(){
         <Link to="/restaurante">
             <button>Gerenciamento Restaurante</button>
         </Link>
+        <Link to='/relatorios'>
+        <button>Relatórios</button>
+        </Link>
         </div>
     )
 }
