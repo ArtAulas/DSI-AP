@@ -10,7 +10,13 @@ export default function PageRelat(){
         <button onClick={voltar}>Voltar</button>
         <h1>Página de Relatórios</h1>
         <Link to='/relat1'>
-        <button>Relatório 1</button>
+        <button>Faturamento Produtos</button>
+        </Link>
+        <Link to='/relat2'>
+        <button>Faturamento X Dias</button>
+        </Link>
+        <Link to='/relat3'>
+        <button>Quantidade Vendida X Restaurante</button>
         </Link>
         </>
     )
