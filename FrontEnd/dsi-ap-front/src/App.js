@@ -39,6 +39,8 @@ import HistoricoPedidos from './pages/HistoricoPedidos';
 import PedidoAntigo from './pages/PedidoAntigo';
 import PageRelat from './pages/PaginaRelatorios';
 import Relat1 from './pages/Relatorio1';
+import Relat2 from './pages/Relatorio2';
+import Relat3 from './pages/Relatorio3';
 
 function App() {
   return (
@@ -53,6 +55,8 @@ function App() {
     <IdPedidoPageProvider>
       <Router>
         <Routes>
+          <Route path='/relat3' element={<Relat3/>}/>
+          <Route path='/relat2' element={<Relat2/>}/>
           <Route path='/relat1' element={<Relat1/>}/>
           <Route path='/relatorios' element={<PageRelat/>}/>
           <Route path='/pedidoanterior' element={<PedidoAntigo/>}/>

@@ -18,6 +18,11 @@ export default function Relat1(){
     let [dtuniq,setDtUniq]=useState(false)
     let [dtperi,setDtPeri]=useState(false)
 
+    let [idRest,setIdRest]=useState(0)
+    const idRestChange=(e)=>{
+        setIdRest(e.target.value)
+    }
+
     let navigate=useNavigate()
     function voltar(){
         navigate(-1)
@@ -60,24 +65,36 @@ export default function Relat1(){
         setDtPeri(true)
     }
 
+    const buscaRest=async()=>{
+        let url='http://127.0.0.1:8003/relatorios/relatorio1/restaurante/'+idRest
+        let api=await fetch(url)
+        let data=await api.json()
+        setRetorno(data)
+        setDtUniq(false)
+        setDtPeri(false)
+    }
+
     return(
         <>
         <button onClick={voltar}>Voltar</button>
         <h1>Relatório 1</h1>
-        <button onClick={buscaDados}>Reiniciar</button>
-        {dtuniq?(<h2>Buscando por Data Única</h2>):(dtperi?(<h2>Buscando por Período</h2>):(<h2>Busca Geral</h2>))}
-        <div>
+        <button onClick={buscaDados}>Reiniciar</button><br/>
+        <label>Id Restaurante</label>
+        <input type='number' onChange={idRestChange}/>
+        <button onClick={buscaRest}>Busca por Restaurante</button>
+        <div className="filtro_relat">
             <label>Selecione Data única</label>
-            <input type="date" onChange={dataChange}/>
+            <input type="date" onChange={dataChange}/><br/>
             <button onClick={buscaData}>Buscar por data específica</button>
         </div><br/>
-        <div>
+        <div className="filtro_relat">
             <label>Selecione Data Inicial</label>
             <input type="date" onChange={dataIChange}/><br/>
             <label>Selecione Data Final</label>
-            <input type="date" onChange={dataFChange}/>
+            <input type="date" onChange={dataFChange}/><br/>
             <button onClick={buscaPeriodo}>Buscar por período</button>
         </div><br/>
+        {dtuniq?(<h2>Buscando por Data Única</h2>):(dtperi?(<h2>Buscando por Período</h2>):(<h2>Busca Geral</h2>))}
         <table className="tab1">
             <tr>
                 <td>Número</td>
@@ -93,7 +110,7 @@ export default function Relat1(){
                 <tr>
                     <td>{index+1}</td>
                     <td>{item.Nome}</td>
-                    <td>R${item.Faturamento_Total}</td>
+                    <td>R${item.Faturamento_Total.toFixed(2)}</td>
                     <td>R${item.Preco_Unitario}</td>
                     <td>{item.Quantidade_Total}</td>
                     <td>{item.Restaurante}</td>
