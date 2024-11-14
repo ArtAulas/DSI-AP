@@ -105,50 +105,63 @@ def relatorio2_P(diaI:str,diaF:str, db:Session=Depends(get_db)):
     l=[{'dia':dado[1],'faturamento':dado[0]} for dado in dados]
     return l
 
+@router.get("/relatorio2/completo/{diaI}/{diaF}/{id}")
+def relatorio2_C(diaI:str,diaF:str,id:int, db:Session=Depends(get_db)):
+    q=text('''  select sum(total_pedido), data_e_hora_pedido 
+                from pedido
+                where 	data_e_hora_pedido<>'' and id_restaurante<>0
+		                and data_e_hora_pedido BETWEEN :inicio and :fim
+                        and id_restaurante=:idR
+                group by data_e_hora_pedido
+                order by data_e_hora_pedido asc''')
+    dados=db.execute(q,{'inicio':diaI,'fim':diaF,'idR':id}).all()
+    l=[{'dia':dado[1],'faturamento':dado[0]} for dado in dados]
+    return l
+
 @router.get("/relatorio3/sem_filtro")
 def relatorio3(db:Session=Depends(get_db)):
-    q=text('''  select sum(ip.quantidade_produto) 'Quantidade Vendida',r.nome_restaurante 'Restaurante'
+    q=text('''  select count(*) ,r.nome_restaurante 
                 from pedido p   join restaurante r on p.id_restaurante=r.id_restaurante
 				                join item_pedido ip on p.id_pedido=ip.id_pedido
                 where data_e_hora_pedido<>''
                 group by r.id_restaurante
-                order by 'Quantidade Vendida' asc''')
+                order by count(*) desc''')
     dados=db.execute(q).all()
     l=[{'restaurante':dado[1],'qtd_vendida':dado[0]} for dado in dados]
     return l
 
 @router.get("/relatorio3/periodo/{diaI}/{diaF}")
 def relatorio3_P(diaI:str,diaF:str,db:Session=Depends(get_db)):
-    q=text('''  select sum(ip.quantidade_produto) 'Quantidade Vendida',r.nome_restaurante 'Restaurante'
+    q=text('''  select count(*) ,r.nome_restaurante 
                 from pedido p   join restaurante r on p.id_restaurante=r.id_restaurante
 				                join item_pedido ip on p.id_pedido=ip.id_pedido
                 where data_e_hora_pedido<>'' and data_e_hora_pedido BETWEEN :inicio and :fim
                 group by r.id_restaurante
-                order by 'Quantidade Vendida' asc''')
+                order by count(*) desc''')
     dados=db.execute(q,{'inicio':diaI,'fim':diaF}).all()
     l=[{'restaurante':dado[1],'qtd_vendida':dado[0]} for dado in dados]
     return l
 
 @router.get("/relatorio3/data/{dia}")
 def relatorio3_P(dia:str,db:Session=Depends(get_db)):
-    q=text('''  select sum(ip.quantidade_produto) 'Quantidade Vendida',r.nome_restaurante 'Restaurante'
+    q=text('''  select count(*) ,r.nome_restaurante
                 from pedido p   join restaurante r on p.id_restaurante=r.id_restaurante
 				                join item_pedido ip on p.id_pedido=ip.id_pedido
                 where data_e_hora_pedido<>'' and data_e_hora_pedido=:diaP
                 group by r.id_restaurante
-                order by 'Quantidade Vendida' asc''')
+                order by count(*) desc''')
     dados=db.execute(q,{'diaP':dia}).all()
     l=[{'restaurante':dado[1],'qtd_vendida':dado[0]} for dado in dados]
     return l
 
 @router.get("/relatorio3/especialidade/{espec}")
 def relatorio3_P(espec:str,db:Session=Depends(get_db)):
-    q=text('''  select sum(ip.quantidade_produto) 'Quantidade Vendida',r.nome_restaurante 'Restaurante'
+    q=text('''  select count(*) ,r.nome_restaurante
                 from pedido p   join restaurante r on p.id_restaurante=r.id_restaurante
 				                join item_pedido ip on p.id_pedido=ip.id_pedido
                 where data_e_hora_pedido<>'' and r.especialidade_restaurante=:especR
                 group by r.id_restaurante
-                order by 'Quantidade Vendida' asc''')
+                order by count(*) desc''')
     dados=db.execute(q,{'especR':espec}).all()
     l=[{'restaurante':dado[1],'qtd_vendida':dado[0]} for dado in dados]
     return l

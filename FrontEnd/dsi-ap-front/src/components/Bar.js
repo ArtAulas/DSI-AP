@@ -14,7 +14,7 @@ const option={
         },
         title:{
             display:true,
-            text:'Quantidade de Produtos Vendidos X Restaurante'
+            text:'Quantidade de Pedidos X Restaurante'
         },
         tooltip:{
             titleAlign:'center',
@@ -94,7 +94,7 @@ export default function BarGraph(){
         labels:retorno.map(row=>row.restaurante),
         datasets:[
             {
-                label:'Produtos Vendidos',
+                label:'Pedidos',
                 data:retorno.map(row=>row.qtd_vendida),
                 backgroundColor:['lightcoral',  'lightblue','lightgreen',   'pink'],
                 borderColor:    ['coral',       "blue",     'green',        'red'],
@@ -108,19 +108,14 @@ export default function BarGraph(){
         <button onClick={buscaDados}>Reiniciar</button><br/>
         <label>Especialidade Restaurante</label>
         <input onChange={EspecChange}/>
-        <button onClick={buscaEspec}>Busca por Restaurante</button>
-        <div className="filtro_relat">
-            <label>Selecione Data única</label>
-            <input type="date" onChange={dataChange}/>
-            <button onClick={buscaData}>Buscar por data específica</button>
-        </div><br/>
         <div className="filtro_relat">
             <label>Selecione Data Inicial</label>
             <input type="date" onChange={dataIChange}/><br/>
             <label>Selecione Data Final</label>
             <input type="date" onChange={dataFChange}/><br/>
-            <button onClick={buscaPeriodo}>Buscar por período</button>
         </div>
+        <button>Filtrar</button>
+        
         <Bar style={{height:"500px"}} options={option} data={BarChartData}/>
         </>
     )

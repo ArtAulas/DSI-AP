@@ -16,7 +16,7 @@ export default function PageRelat(){
         <button>Faturamento X Dias</button>
         </Link>
         <Link to='/relat3'>
-        <button>Quantidade Vendida X Restaurante</button>
+        <button>Quantidade Pedidos X Restaurante</button>
         </Link>
         </>
     )

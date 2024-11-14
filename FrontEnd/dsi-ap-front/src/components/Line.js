@@ -29,6 +29,7 @@ const option={
 
 export default function LineGraph(){
     const [retorno,setRetorno]=useState([])
+    const [filtro,setFiltro]=useState('Busca Geral')
 
     let [idRest,setIdRest]=useState(0)
     const idRestChange=(e)=>{
@@ -49,6 +50,7 @@ export default function LineGraph(){
         let api=await fetch(url)
         let data=await api.json()
         setRetorno(data)
+        setFiltro('Busca Geral')
     }
 
     const buscaRest=async()=>{
@@ -56,6 +58,7 @@ export default function LineGraph(){
         let api=await fetch(url)
         let data=await api.json()
         setRetorno(data)
+        setFiltro('Busca por Restaurante')
     }
 
     const buscaPeriodo=async()=>{
@@ -66,14 +69,36 @@ export default function LineGraph(){
         let api=await fetch(url)
         let data=await api.json()
         setRetorno(data)
+        setFiltro('Busca por Período')
+    }
+
+    const buscaCompleta=async()=>{
+        let url='http://127.0.0.1:8003/relatorios/relatorio2/completo/'+diaI+'/'+diaF+'/'+idRest
+        let api=await fetch(url)
+        let data=await api.json()
+        setRetorno(data)
+        setFiltro('Busca Completa')
     }
 
     useEffect(()=>{
         buscaDados();
     },[])
 
+    const buscar=()=>{
+        if (diaI==='' && diaF==='' && idRest==0){
+            buscaDados();
+        }
+        if ((diaI==='' || diaF==='')&& idRest!=0){
+            return buscaRest();
+        }
+        if (idRest==0){
+            return buscaPeriodo();
+        }
+        buscaCompleta();
+    }
+
     const lineChartData={
-        labels:retorno.map(row=>row.dia),
+        labels:retorno.map(row=>row.dia),// for row in retorno
         datasets:[
             {
                 label:'Faturamento em R$',
@@ -89,15 +114,15 @@ export default function LineGraph(){
         <br/>
         <label>Id Restaurante</label>
         <input type='number' onChange={idRestChange}/>
-        <button onClick={buscaRest}>Busca por Restaurante</button>
         <br/>
         <div className="filtro_relat">
             <label>Selecione Data Inicial</label>
             <input type="date" onChange={dataIChange}/><br/>
             <label>Selecione Data Final</label>
             <input type="date" onChange={dataFChange}/><br/>
-            <button onClick={buscaPeriodo}>Buscar por período</button>
         </div>
+        <button onClick={buscar}>Filtrar</button>
+        <h1>{filtro}</h1>
         <Line style={{height:"500px"}} options={option} data={lineChartData}/>
         </>
     )
