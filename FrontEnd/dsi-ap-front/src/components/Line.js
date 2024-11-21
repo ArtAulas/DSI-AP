@@ -63,6 +63,7 @@ export default function LineGraph(){
 
     const buscaPeriodo=async()=>{
         if (diaI==='' || diaF===''){
+            buscaDados();
             return alert('Selecione um dia')
         }
         let url='http://127.0.0.1:8003/relatorios/relatorio2/periodo/'+diaI+'/'+diaF

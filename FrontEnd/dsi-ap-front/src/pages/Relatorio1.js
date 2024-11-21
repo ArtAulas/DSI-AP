@@ -3,10 +3,8 @@ import { useEffect,useState } from "react"
 
 export default function Relat1(){
     let [retorno,setRetorno]=useState([])
-    let [dia,setData]=useState('')
-    const dataChange=(e)=>{
-        setData(e.target.value)
-    }
+    const [filtro,setFiltro]=useState('Busca Geral')
+
     let [diaI,setDataI]=useState('')
     const dataIChange=(e)=>{
         setDataI(e.target.value)
@@ -15,8 +13,6 @@ export default function Relat1(){
     const dataFChange=(e)=>{
         setDataF(e.target.value)
     }
-    let [dtuniq,setDtUniq]=useState(false)
-    let [dtperi,setDtPeri]=useState(false)
 
     let [idRest,setIdRest]=useState(0)
     const idRestChange=(e)=>{
@@ -33,36 +29,23 @@ export default function Relat1(){
         let api=await fetch(url)
         let data=await api.json()
         setRetorno(data)
-        setDtUniq(false)
-        setDtPeri(false)
+        setFiltro('Busca Geral')
     }
 
     useEffect(()=>{
         buscaDados();
     },[])
 
-    const buscaData=async()=>{
-        if (dia===''){
-            return alert('Selecione um dia')
-        }
-        let url='http://127.0.0.1:8003/relatorios/relatorio1/com_data/'+dia
-        let api=await fetch(url)
-        let data=await api.json()
-        setRetorno(data)
-        setDtUniq(true)
-        setDtPeri(false)
-    }
-
     const buscaPeriodo=async()=>{
         if (diaI==='' || diaF===''){
+            buscaDados();
             return alert('Selecione um dia')
         }
         let url='http://127.0.0.1:8003/relatorios/relatorio1/com_periodo/'+diaI+'/'+diaF
         let api=await fetch(url)
         let data=await api.json()
         setRetorno(data)
-        setDtUniq(false)
-        setDtPeri(true)
+        setFiltro('Busca Período')
     }
 
     const buscaRest=async()=>{
@@ -70,8 +53,28 @@ export default function Relat1(){
         let api=await fetch(url)
         let data=await api.json()
         setRetorno(data)
-        setDtUniq(false)
-        setDtPeri(false)
+        setFiltro('Busca Restaurante')
+    }
+
+    const buscaCompleta=async()=>{
+        let url='http://127.0.0.1:8003/relatorios/relatorio1/completo/'+diaI+'/'+diaF+'/'+idRest
+        let api=await fetch(url)
+        let data=await api.json()
+        setRetorno(data)
+        setFiltro('Busca Completa')
+    }
+
+    const buscar=()=>{
+        if (diaI==='' && diaF==='' && idRest==0){
+            buscaDados();
+        }
+        if ((diaI==='' || diaF==='')&& idRest!=0){
+            return buscaRest();
+        }
+        if (idRest==0){
+            return buscaPeriodo();
+        }
+        buscaCompleta();
     }
 
     return(
@@ -81,20 +84,14 @@ export default function Relat1(){
         <button onClick={buscaDados}>Reiniciar</button><br/>
         <label>Id Restaurante</label>
         <input type='number' onChange={idRestChange}/>
-        <button onClick={buscaRest}>Busca por Restaurante</button>
-        <div className="filtro_relat">
-            <label>Selecione Data única</label>
-            <input type="date" onChange={dataChange}/><br/>
-            <button onClick={buscaData}>Buscar por data específica</button>
-        </div><br/>
         <div className="filtro_relat">
             <label>Selecione Data Inicial</label>
             <input type="date" onChange={dataIChange}/><br/>
             <label>Selecione Data Final</label>
             <input type="date" onChange={dataFChange}/><br/>
-            <button onClick={buscaPeriodo}>Buscar por período</button>
         </div><br/>
-        {dtuniq?(<h2>Buscando por Data Única</h2>):(dtperi?(<h2>Buscando por Período</h2>):(<h2>Busca Geral</h2>))}
+        <button onClick={buscar}>Filtrar</button>
+        <h1>{filtro}</h1>
         <table className="tab1">
             <tr>
                 <td>Número</td>

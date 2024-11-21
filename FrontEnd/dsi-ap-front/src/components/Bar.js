@@ -30,6 +30,7 @@ const option={
 
 export default function BarGraph(){
     const [retorno,setRetorno]=useState([])
+    const [filtro,setFiltro]=useState('Busca Geral')
 
     let [diaI,setDataI]=useState('')
     const dataIChange=(e)=>{
@@ -54,6 +55,7 @@ export default function BarGraph(){
         let api=await fetch(url)
         let data=await api.json()
         setRetorno(data)
+        setFiltro('Busca Geral')
     }
 
     useEffect(()=>{
@@ -62,22 +64,14 @@ export default function BarGraph(){
 
     const buscaPeriodo=async()=>{
         if (diaI==='' || diaF===''){
+            buscaDados();
             return alert('Selecione um dia')
         }
         let url='http://127.0.0.1:8003/relatorios/relatorio3/periodo/'+diaI+'/'+diaF
         let api=await fetch(url)
         let data=await api.json()
         setRetorno(data)
-    }
-
-    const buscaData=async()=>{
-        if (dia===''){
-            return alert('Selecione um dia')
-        }
-        let url='http://127.0.0.1:8003/relatorios/relatorio3/data/'+dia
-        let api=await fetch(url)
-        let data=await api.json()
-        setRetorno(data)
+        setFiltro('Busca por Período')
     }
 
     const buscaEspec=async()=>{
@@ -88,6 +82,28 @@ export default function BarGraph(){
         let api=await fetch(url)
         let data=await api.json()
         setRetorno(data)
+        setFiltro('Busca por Especialidade')
+    }
+
+    const buscaCompleta=async()=>{
+        let url='http://127.0.0.1:8003/relatorios/relatorio3/completo/'+diaI+'/'+diaF+'/'+espec
+        let api=await fetch(url)
+        let data=await api.json()
+        setRetorno(data)
+        setFiltro('Busca Completa')
+    }
+
+    const buscar=()=>{
+        if (diaI==='' && diaF==='' && espec==''){
+            buscaDados();
+        }
+        if ((diaI==='' || diaF==='')&& espec!=''){
+            return buscaEspec();
+        }
+        if (espec==''){
+            return buscaPeriodo();
+        }
+        buscaCompleta();
     }
 
     const BarChartData={
@@ -114,7 +130,8 @@ export default function BarGraph(){
             <label>Selecione Data Final</label>
             <input type="date" onChange={dataFChange}/><br/>
         </div>
-        <button>Filtrar</button>
+        <button onClick={buscar}>Filtrar</button>
+        <h1>{filtro}</h1>
         
         <Bar style={{height:"500px"}} options={option} data={BarChartData}/>
         </>

@@ -16,6 +16,7 @@ export default function FechaPedidoPage(){
     let [endereco,setEndereco]=useState([])
     let [restaurante,setRestaurante]=useState([])
     let [usuario,setUsuario]=useState([])
+    let [cupom,setCupom]=useState('')
 
     let [itens,setItens]=useState([])
     let [total,setTotal]=useState(0)
@@ -92,12 +93,25 @@ export default function FechaPedidoPage(){
         })
         if (api.ok){
             alert('Pedido Enviado ao Restaurante')
-            ChangePedido(0)
-            ChangeRestPedido(0)
-            navigate('/paginainicial')
+            setCupom('enviar')
         }
         else{
             alert('Erro ao Fechar Pedido')
+        }
+    }
+
+    const resetar=()=>{
+        ChangePedido(0)
+        ChangeRestPedido(0)
+        navigate('/paginainicial')
+    }
+
+    const enviaCupom=async()=>{
+        alert('Enviando Cupom, por favor aguarde...')
+        let url='http://127.0.0.1:8003/extras/cupom/'+pedidoId;
+        let api=await fetch(url);
+        if (api.ok){
+            resetar();
         }
     }
 
@@ -109,6 +123,13 @@ export default function FechaPedidoPage(){
             alert('Você Cancelou a Operação')
         }
     }
+
+    useEffect(()=>{
+        if(cupom!==''){
+            console.log('Enviando Cupom:'+pedidoId)
+            enviaCupom();
+        }
+    },[cupom])
 
     return(
         <>
