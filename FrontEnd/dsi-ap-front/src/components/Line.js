@@ -104,7 +104,8 @@ export default function LineGraph(){
             {
                 label:'Faturamento em R$',
                 data:retorno.map(row=>row.faturamento),
-                borderColor:"midnightblue"
+                borderColor:"midnightblue",
+                backgroundColor:"red"
             }
         ]
     }
