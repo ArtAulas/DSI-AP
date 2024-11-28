@@ -64,7 +64,7 @@ export default function ValidarCodigo() {
 
 	return (
 		<form onSubmit={confirmarCodigo}>
-			<label>Número:</label>
+			<label>Insira o Código Enviado Por Email:</label><br></br>
             <input type="number" name="codgioTeste" onChange={setCodigoChange}></input>
 			<input type="submit" value="Confirmar"/>
 		</form>

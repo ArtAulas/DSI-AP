@@ -6,16 +6,19 @@ export default function HomePage(){
         <Link to="Login">
             <button>Login</button>
         </Link>
-        
+        <br/>
         <Link to="/cadastro">
             <button>Cadastro</button>
         </Link>
+        <br/>
         <Link to="/restaurante">
             <button>Gerenciamento Restaurante</button>
         </Link>
+        <br/>
         <Link to='/relatorios'>
-        <button>Relatórios</button>
+            <button>Relatórios</button>
         </Link>
+        <br/>
         </div>
     )
 }
